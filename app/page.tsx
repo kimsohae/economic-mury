@@ -28,7 +28,7 @@ export default function Home() {
         <span className="block text-sm text-gray-400 mb-3">
           *경제 머머리: 경제머리가 없는 사람
         </span>
-        <Link href={"/test/1"}>
+        <Link href={"/test"}>
           <Button size={"lg"}>테스트 시작</Button>
         </Link>
       </div>
