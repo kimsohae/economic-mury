@@ -1,6 +1,7 @@
 import React from "react";
 import quizData from "@/public/questions.json";
 import Quiz from "@/components/Quiz";
+import ProgressBar from "@/components/ProgressBar";
 
 const ANSWER_LIST = [
   {
@@ -48,8 +49,7 @@ export default function Page() {
   return (
     <>
       <Quiz quiz={quizList} />
-      <div className="absolute bottom-4 w-[calc(100%-2rem)] rounded-lg h-3 bg-slate-200" />
-      <div className="absolute bottom-4 left-[1rem] w-[calc(10%)] rounded-lg h-3 bg-primary" />
+      <ProgressBar />
     </>
   );
 }
