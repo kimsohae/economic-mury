@@ -2,10 +2,16 @@
 import { useUser } from "@/state/UserContext";
 import React from "react";
 
-export default function ProgressBar() {
+interface Props {
+  quizLength: number;
+}
+
+export default function ProgressBar({ quizLength }: Props) {
   const {
     user: { progress },
   } = useUser();
+  const percentage = ((progress + 1) / quizLength) * 100;
+
   return (
     <>
       <div
@@ -14,8 +20,8 @@ export default function ProgressBar() {
         }
       />
       <div
-        style={{ width: `${(progress + 1) * 10}%` }}
-        className={`absolute bottom-4 left-[1rem] rounded-lg h-3 bg-primary`}
+        style={{ width: `${percentage}%` }}
+        className={`absolute bottom-4 left-[1rem] max-w-[calc(100%-2rem)] rounded-lg h-3 bg-primary`}
       />
     </>
   );

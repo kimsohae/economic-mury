@@ -3,25 +3,6 @@ import quizData from "@/public/questions.json";
 import Quiz from "@/components/Quiz";
 import ProgressBar from "@/components/ProgressBar";
 
-const ANSWER_LIST = [
-  {
-    id: "a",
-    label: "무디스(Moody's)",
-  },
-  {
-    id: "b",
-    label: "블룸버그(Bloomberg)",
-  },
-  {
-    id: "c",
-    label: "스탠다드앤푸어스(S&P)",
-  },
-  {
-    id: "d",
-    label: "피치(FitchRatings)",
-  },
-];
-
 export type QuizOption = {
   id: string;
   text: string;
@@ -49,7 +30,7 @@ export default function Page() {
   return (
     <>
       <Quiz quiz={quizList} />
-      <ProgressBar />
+      <ProgressBar quizLength={quizList.length} />
     </>
   );
 }
