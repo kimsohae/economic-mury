@@ -2,11 +2,20 @@
 import React, { useEffect, useMemo, useState } from "react";
 import QuizOptions from "@/components/QuizOptions";
 import { Quiz as QuizType } from "@/app/test/page";
+import { initialUser, useUser } from "@/state/UserContext";
 
 export default function Quiz({ quiz }: { quiz: QuizType[] }) {
-  const [currentIndex, setCurrentIndex] = useState(0);
+  const {
+    user: { progress: currentIndex },
+    setUser,
+  } = useUser();
   const currentQuiz = quiz[currentIndex];
   const isLastQuiz = currentIndex === quiz.length - 1;
+
+  useEffect(() => {
+    // 최초에 점수/진행도 초기화
+    setUser(initialUser);
+  }, []);
 
   return (
     <section className="flex flex-col items-center">
@@ -20,11 +29,7 @@ export default function Quiz({ quiz }: { quiz: QuizType[] }) {
         </div>
       </div>
       <div className="grid gap-4 mx-12">
-        <QuizOptions
-          options={currentQuiz.options}
-          isLastQuiz={isLastQuiz}
-          setCurrentIndex={setCurrentIndex}
-        />
+        <QuizOptions options={currentQuiz.options} isLastQuiz={isLastQuiz} />
       </div>
     </section>
   );

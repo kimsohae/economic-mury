@@ -1,3 +1,4 @@
+import { UserProvider } from "@/state/UserContext";
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
@@ -27,9 +28,11 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased bg-slate-50`}
       >
-        <main className="relative h-dvh max-w-[600px] m-auto bg-white flex flex-col items-center justify-center text-gray-600 ">
-          {children}
-        </main>
+        <UserProvider>
+          <main className="relative h-dvh max-w-[600px] m-auto bg-white flex flex-col items-center justify-center text-gray-600 ">
+            {children}
+          </main>
+        </UserProvider>
       </body>
     </html>
   );
