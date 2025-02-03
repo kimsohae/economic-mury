@@ -9,13 +9,20 @@ export default function Home() {
       <div className="relative m-auto">
         <Image
           alt="logo"
-          width={440}
-          height={200}
+          width={480}
+          height={485}
+          priority
           src="/H1.png"
           className="relative z-10 px-4"
         />
         <div className="absolute flex flex-col items-center left-[50%] translate-x-[-50%] top-[-24%]">
-          <Image alt="main" width={140} src="/murmury.png" height={140} />
+          <Image
+            alt="main"
+            width={140}
+            src="/murmury.png"
+            height={167}
+            priority
+          />
         </div>
 
         {/* <div className="text-xl font-semibold rotate-[-10deg] m-auto">
