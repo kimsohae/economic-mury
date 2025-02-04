@@ -15,7 +15,10 @@ function getResult() {}
 
 export default function QuizOptions({ options, isLastQuiz }: Props) {
   const { replace } = useRouter();
-  const { setUser } = useUser();
+  const {
+    user: { progress },
+    setUser,
+  } = useUser();
 
   const onClickButton = (option: QuizOption) => {
     // [1] 점수, 진행도 기록: 맞으면 득점
@@ -28,7 +31,7 @@ export default function QuizOptions({ options, isLastQuiz }: Props) {
 
     // [2] 마지막 문항일 경우, 결과 페이지로 이동
     if (isLastQuiz) {
-      replace("/result");
+      replace("/result/1");
     }
   };
 
@@ -38,7 +41,7 @@ export default function QuizOptions({ options, isLastQuiz }: Props) {
         <Button
           variant="outline"
           size="lg"
-          key={option.id}
+          key={`${progress}_${option.id}`}
           onClick={() => onClickButton(option)}
         >
           {option.text}
