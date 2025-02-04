@@ -1,5 +1,5 @@
 "use client";
-import React, { useEffect, useMemo, useState } from "react";
+import React, { useEffect } from "react";
 import QuizOptions from "@/components/QuizOptions";
 import { Quiz as QuizType } from "@/app/test/page";
 import { initialUser, useUser } from "@/state/UserContext";
@@ -13,8 +13,8 @@ export default function Quiz({ quiz }: { quiz: QuizType[] }) {
   const isLastQuiz = currentIndex === quiz.length - 1;
 
   useEffect(() => {
-    // 최초에 점수/진행도 초기화
-    setUser(initialUser);
+    // celanup: 점수/진행도 초기화
+    return setUser(initialUser);
   }, []);
 
   return (
