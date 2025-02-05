@@ -1,6 +1,8 @@
+import MainScreen from "@/components/MainScreen";
 import { UserProvider } from "@/state/UserContext";
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
+import Head from "next/head";
 import "./globals.css";
 
 const geistSans = Geist({
@@ -25,13 +27,14 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="ko" className="bg-slate-50">
+      <Head>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      </Head>
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased bg-slate-50`}
       >
         <UserProvider>
-          <main className="relative h-dvh max-w-[600px] m-auto bg-white flex flex-col items-center justify-center text-gray-600 ">
-            {children}
-          </main>
+          <MainScreen>{children}</MainScreen>
         </UserProvider>
       </body>
     </html>
