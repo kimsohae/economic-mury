@@ -31,12 +31,10 @@ jobs:
       - name: Install Dependencies
         run: |
           node --version
-          npm ci --production
-          npm install @types/react 
-          npm install @types/node
+          yarn install --frozen-lockfile
 
       - name: Build Static Website
-        run: npm run build
+        run: yarn build
 
       - name: Copy files to the production website with the AWS CLI
         run: |
