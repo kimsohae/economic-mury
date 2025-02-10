@@ -4,7 +4,6 @@ import Script from "next/script";
 import { Button } from "@/components/ui/button";
 
 const KAKAO_JS_KEY = process.env.NEXT_PUBLIC_KAKAO_JS_KEY || "";
-
 const initKakao = () => {
   window.Kakao.init(KAKAO_JS_KEY);
 };
@@ -38,6 +37,7 @@ interface Props {
 export default function ShareButton({ title, description, url }: Props) {
   const onClickShare = () => {
     if (window.Kakao) {
+      const shareUrl = window.location.href;
       const options: ShareOptions = {
         objectType: "feed",
         content: {
@@ -45,8 +45,8 @@ export default function ShareButton({ title, description, url }: Props) {
           description: "test Description",
           imageUrl: "test Image",
           link: {
-            mobileWebUrl: "http://localhost:3000",
-            webUrl: "http://localhost:3000",
+            mobileWebUrl: shareUrl,
+            webUrl: shareUrl,
           },
         },
       };
