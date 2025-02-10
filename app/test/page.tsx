@@ -29,8 +29,8 @@ export default function Page() {
 
   return (
     <>
-      <Quiz quiz={quizList} />
       <ProgressBar quizLength={quizList.length} />
+      <Quiz quiz={quizList} />
     </>
   );
 }

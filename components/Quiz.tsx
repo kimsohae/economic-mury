@@ -3,6 +3,8 @@ import React, { useEffect } from "react";
 import QuizOptions from "@/components/QuizOptions";
 import { Quiz as QuizType } from "@/app/test/page";
 import { initialUser, useUser } from "@/state/UserContext";
+import { Button } from "@/components/ui/button";
+import QuizAnswer from "./QuizAnswer";
 
 export default function Quiz({ quiz }: { quiz: QuizType[] }) {
   const {
@@ -19,7 +21,7 @@ export default function Quiz({ quiz }: { quiz: QuizType[] }) {
 
   return (
     <section className="flex flex-col items-center justify-start w-full h-full">
-      <div className="h-[30%] flex flex-col items-center  px-4 pt-20">
+      <div className=" flex flex-col items-center  px-4 pt-[4.5rem]">
         <span className="text-xl font-bold mb-4 text-center">
           Q{currentQuiz.id}
         </span>
@@ -32,11 +34,7 @@ export default function Quiz({ quiz }: { quiz: QuizType[] }) {
           </div>
         </div>
       </div>
-      <div className="h-[70%] py-8">
-        <div className="grid gap-4 m-auto">
-          <QuizOptions options={currentQuiz.options} isLastQuiz={isLastQuiz} />
-        </div>
-      </div>
+      <QuizAnswer options={currentQuiz.options} isLastQuiz={isLastQuiz} />
     </section>
   );
 }

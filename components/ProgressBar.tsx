@@ -16,12 +16,12 @@ export default function ProgressBar({ quizLength }: Props) {
     <>
       <div
         className={
-          "absolute bottom-4 w-[calc(100%-2rem)] rounded-lg h-3 bg-slate-200"
+          "absolute top-4 w-[calc(100%-2rem)] rounded-lg h-3 bg-slate-200"
         }
       />
       <div
         style={{ width: `${percentage}%` }}
-        className={`absolute bottom-4 left-[1rem] max-w-[calc(100%-2rem)] rounded-lg h-3 bg-primary`}
+        className={`absolute top-4 left-[1rem] max-w-[calc(100%-2rem)] rounded-lg h-3 bg-primary`}
       />
     </>
   );
