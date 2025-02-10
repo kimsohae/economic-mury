@@ -27,6 +27,17 @@
     {
       "id": "3",
       "content": {
+        "context": "채권은 대표적인 안전자산 중 하나입니다.",
+        "question": "채권은 예금자 보호가 될까요?"
+      },
+      "options": [
+        { "id": "o1", "text": "O", "isCorrect": false },
+        { "id": "o2", "text": "X", "isCorrect": true }
+      ]
+    },
+    {
+      "id": "4",
+      "content": {
         "context": "금리 변동은 경제 전반에 영향을 미칩니다.",
         "question": "금리가 오르면 일반적으로 채권 가격은 어떻게 될까요?"
       },
@@ -34,6 +45,19 @@
         { "id": "o1", "text": "오른다", "isCorrect": false },
         { "id": "o2", "text": "내린다", "isCorrect": true },
         { "id": "o3", "text": "변하지 않는다", "isCorrect": false }
+      ]
+    },
+    {
+      "id": "5",
+      "content": {
+        "context": "개인처럼 국가도 신용평가를 받는데요.\n세계 3대 신용평가회사에서 국가읭 신용을 평가하고 있습니다.",
+        "question": "세계 3대 신용평가회사가 아닌 곳은?"
+      },
+      "options": [
+        { "id": "o1", "text": "무디스(Moody's)", "isCorrect": false },
+        { "id": "o2", "text": "블룸버그(Bloomberg)", "isCorrect": true },
+        { "id": "o3", "text": "스탠다드앤푸어스(S&P)", "isCorrect": false },
+        { "id": "o4", "text": "피치(Fitch)", "isCorrect": false }
       ]
     }
   ]
