@@ -5,28 +5,37 @@ import { Button } from "@/components/ui/button";
 import { useRouter } from "next/navigation";
 import { useUser } from "@/state/UserContext";
 import { Rank } from "@/app/result/[rank]/page";
+import CrossIcon from "@/components/icon/CrossIcon";
+import CheckIcon from "@/components/icon/CheckIcon";
 
 interface Props {
   options: QuizOption[];
+  explanations: string;
   isLastQuiz: boolean;
 }
 
 function getRank(score: number): Rank {
-  if (score <= 2) {
+  if (score <= 1) {
     return "bald";
-  } else if (score <= 4) {
+  } else if (score <= 3) {
     return "downy";
-  } else if (score <= 6) {
+  } else if (score <= 5) {
     return "grass";
-  } else if (score <= 8) {
+  } else if (score <= 7) {
     return "plant";
+  } else if (score <= 9) {
+    return "rice";
   } else if (score <= 10) {
     return "jungle";
   }
   return "bald";
 }
 
-export default function QuizAnswer({ options, isLastQuiz }: Props) {
+export default function QuizAnswer({
+  options,
+  explanations,
+  isLastQuiz,
+}: Props) {
   const { replace } = useRouter();
   const {
     user: { progress, score },
@@ -63,7 +72,7 @@ export default function QuizAnswer({ options, isLastQuiz }: Props) {
 
   return (
     <>
-      <div className="h-[70%] py-8 w-full overflow-y-scroll px-8">
+      <div className="h-[70%] py-8 w-full overflow-y-auto px-8">
         <div className="grid gap-4 m-auto justify-center">
           {options.map((option, idx) => (
             <Button
@@ -83,22 +92,45 @@ export default function QuizAnswer({ options, isLastQuiz }: Props) {
         <div
           className={`absolute  ${
             isSubmitted
-              ? "translate-y-[-100%] h-[100%]  border-t-2 pb-[100px]"
+              ? "translate-y-[-100%] h-[100%] border-t-2 pb-[100px] rounded-3xl"
               : "translate-y-[0%] h-[0%] border-transparent pb-[0px]"
-          } w-full bg-white   border-gray-200 px-4 pt-4  transform transition-all duration-300 ease-in-out`}
+          } w-full bg-white border-gray-200 px-4 pt-4  transform transition-all duration-300 ease-in-out`}
         >
           {isSubmitted && (
-            <span
-              className={`${
-                isCorrect ? "text-blue-500" : "text-red-500"
-              } text-lg font-semibold`}
-            >
-              {isCorrect ? "✅ 맞았습니다!" : "❌ 땡"}
-            </span>
+            <>
+              <div
+                className={`${
+                  isCorrect ? "text-blue-500" : "text-red-500"
+                } text-lg font-semibold flex gap-2 items-center`}
+              >
+                {isCorrect ? (
+                  <>
+                    <div className="w-6 h-6 bg-blue-500 rounded-full relative">
+                      <CheckIcon className="absolute" fill="white" />
+                    </div>{" "}
+                    정답!
+                  </>
+                ) : (
+                  <>
+                    <div className="w-6 h-6 bg-red-500 rounded-full relative">
+                      <CrossIcon className="absolute" fill="white" />
+                    </div>
+                    땡
+                  </>
+                )}
+              </div>
+              <div
+                className={`${
+                  isCorrect ? "text-blue-400" : "text-red-400"
+                } mt-2 text-sm`}
+              >
+                {explanations}
+              </div>
+            </>
           )}
         </div>
 
-        <div className="bg-white w-full px-4 pb-4 z-10">
+        <div className="bg-white w-full px-4 pb-[30px] z-10">
           <Button
             size="full"
             disabled={selectedIdx === null}
