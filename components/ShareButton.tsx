@@ -58,7 +58,7 @@ export default function ShareButton({ title, description, url }: Props) {
 
   return (
     <>
-      <Button size="md" onClick={onClickShare}>
+      <Button size="full" onClick={onClickShare}>
         결과 공유{" "}
       </Button>
       <Script
