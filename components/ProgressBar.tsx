@@ -13,16 +13,14 @@ export default function ProgressBar({ quizLength }: Props) {
   const percentage = ((progress + 1) / quizLength) * 100;
 
   return (
-    <>
-      <div
-        className={
-          "absolute top-4 w-[calc(100%-2rem)] rounded-lg h-3 bg-slate-200"
-        }
-      />
-      <div
-        style={{ width: `${percentage}%` }}
-        className={`absolute top-4 left-[1rem] max-w-[calc(100%-2rem)] rounded-lg h-3 bg-primary transition-all`}
-      />
-    </>
+    <div className="absolute top-4 w-full ">
+      <div className="relative mx-4">
+        <div className={"absolute w-full rounded-lg h-3 bg-slate-200"} />
+        <div
+          style={{ width: `${percentage}%` }}
+          className={`absolute rounded-lg h-3 bg-primary transition-all`}
+        />
+      </div>
+    </div>
   );
 }
