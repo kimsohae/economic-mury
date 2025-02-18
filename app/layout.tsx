@@ -4,7 +4,7 @@ import type { Metadata } from "next";
 import localFont from "next/font/local";
 import "./globals.css";
 
-export const pretendard = localFont({
+const pretendard = localFont({
   src: [
     {
       path: "../public/font/Pretendard-Medium.subset.woff2",
@@ -20,7 +20,7 @@ export const pretendard = localFont({
   variable: "--font-pretendard",
 });
 
-export const moneygraphy = localFont({
+const moneygraphy = localFont({
   src: "../public/font/Moneygraphy-Rounded.woff2",
   display: "swap",
   weight: "400",

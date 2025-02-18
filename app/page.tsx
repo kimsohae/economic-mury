@@ -1,7 +1,6 @@
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import Image from "next/image";
-import { moneygraphy } from "./layout";
 
 export default function Home() {
   return (
