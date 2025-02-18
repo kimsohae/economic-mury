@@ -16,6 +16,7 @@ export type Quiz = {
     question: string; // 질문
   };
   options: QuizOption[];
+  explanations: string;
 };
 
 // export async function getStaticProps() {

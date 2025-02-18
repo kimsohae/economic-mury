@@ -25,7 +25,7 @@ export default function MainScreen({
       style={{
         height: `calc(var(--vh, 1vh) * 100)`,
       }}
-      className="relative max-w-[540px] m-auto bg-white flex flex-col items-center justify-center text-gray-600 "
+      className="relative max-w-[540px] m-auto bg-white flex flex-col items-center justify-center text-gray-800 "
     >
       {children}
     </main>
