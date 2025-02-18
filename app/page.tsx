@@ -8,7 +8,7 @@ export default function Home() {
     <>
       {" "}
       <div className="relative w-full flex flex-col items-center">
-        <div className="absolute flex flex-col items-center left-[50%] translate-x-[-50%] top-[-66%] w-full">
+        <div className="absolute flex flex-col items-center left-[50%] translate-x-[-50%] top-[-44%] w-full">
           <Image
             alt="main"
             // className=""
@@ -18,14 +18,21 @@ export default function Home() {
             priority
           />
         </div>
-
-        <div
+        <Image
+          className="px-8 w-full max-w-[460px] z-[1]"
+          width={663}
+          height={693}
+          alt="title"
+          src="/img/murmury_title.png"
+          priority
+        />
+        {/* <div
           className={`font-moneygraphy text-8xl font-semibold  rotate-[-10deg] m-auto`}
         >
           <div className="">경제</div>
           <div className="text-primary">머머리</div>
           <div>테스트</div>
-        </div>
+        </div> */}
       </div>
       <div className="absolute bottom-[30px] flex flex-col items-center justify-center w-full">
         <span className="block text-sm text-gray-400 mb-3 font-pretendard">
