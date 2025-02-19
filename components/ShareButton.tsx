@@ -31,19 +31,19 @@ export type ShareOptions = {
 interface Props {
   title: string;
   description: string;
-  url: string;
+  imageUrl: string;
 }
 
-export default function ShareButton({ title, description, url }: Props) {
+export default function ShareButton({ title, description, imageUrl }: Props) {
   const onClickShare = () => {
     if (window.Kakao) {
       const shareUrl = window.location.href;
       const options: ShareOptions = {
         objectType: "feed",
         content: {
-          title: "test Title",
-          description: "test Description",
-          imageUrl: "test Image",
+          title: title,
+          description: description,
+          imageUrl: imageUrl,
           link: {
             mobileWebUrl: shareUrl,
             webUrl: shareUrl,

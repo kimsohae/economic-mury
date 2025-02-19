@@ -64,7 +64,7 @@ export async function generateMetadata({
     title: "경제 머머리 테스트",
     description: `"${rankTitle}", ${rankDesc}`,
     openGraph: {
-      images: [`/img/${rank}.webp`],
+      images: [`${process.env.NEXT_PUBLIC_ROOT_URL}/img/${rank}.webp`],
     },
   };
 }
@@ -113,7 +113,11 @@ export default async function Page({ params }: { params: Params }) {
               다시 하기
             </Button>
           </Link>
-          <ShareButton title={title} description={desc} url={""} />
+          <ShareButton
+            title={title}
+            description={desc}
+            imageUrl={`${process.env.NEXT_PUBLIC_ROOT_URL}/img/${rank}.webp`}
+          />
         </div>
       </div>
     </>
