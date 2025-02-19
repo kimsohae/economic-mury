@@ -41,8 +41,8 @@ export default function ShareButton({ title, description, imageUrl }: Props) {
       const options: ShareOptions = {
         objectType: "feed",
         content: {
-          title: title,
-          description: description,
+          title: "나의 경제 머리숱 상태는?",
+          description: title,
           imageUrl: imageUrl,
           link: {
             mobileWebUrl: shareUrl,
