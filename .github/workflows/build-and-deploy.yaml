@@ -34,7 +34,9 @@ jobs:
           yarn install --frozen-lockfile
 
       - name: Create .env
-        run: echo "NEXT_PUBLIC_KAKAO_JS_KEY=${{ secrets.NEXT_PUBLIC_KAKAO_JS_KEY }}" >>.env
+        run: |
+        echo "NEXT_PUBLIC_KAKAO_JS_KEY=${{ secrets.NEXT_PUBLIC_KAKAO_JS_KEY }}" >>.env
+        echo "NEXT_PUBLIC_ROOT_URL=${{ vars.NEXT_PUBLIC_ROOT_URL }}" >>.env
 
       - name: Build Static Website
         run: yarn build
