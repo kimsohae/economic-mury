@@ -3,23 +3,7 @@ import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import ShareButton from "@/components/ShareButton";
 import Image from "next/image";
-
-export type Rank = "bald" | "downy" | "grass" | "plant" | "rice" | "jungle";
-
-type Params = Promise<{
-  rank: Rank;
-}>;
-
-export async function generateStaticParams() {
-  return [
-    { rank: "bald" },
-    { rank: "downy" },
-    { rank: "grass" },
-    { rank: "plant" },
-    { rank: "rice" },
-    { rank: "jungle" },
-  ];
-}
+import { Metadata } from "next";
 
 const RESULT_MAP: {
   [key in Rank]: { desc: string; title: string };
@@ -49,6 +33,41 @@ const RESULT_MAP: {
     title: "수풀 가득한 정글머리",
   },
 };
+
+export type Rank = "bald" | "downy" | "grass" | "plant" | "rice" | "jungle";
+
+type Params = Promise<{
+  rank: Rank;
+}>;
+
+// 정적 페이지 미리 생성
+export async function generateStaticParams() {
+  return [
+    { rank: "bald" },
+    { rank: "downy" },
+    { rank: "grass" },
+    { rank: "plant" },
+    { rank: "rice" },
+    { rank: "jungle" },
+  ];
+}
+
+// 페이지별 메타데이터 생성
+export async function generateMetadata({
+  params,
+}: {
+  params: Params;
+}): Promise<Metadata> {
+  const rank = (await params).rank;
+  const { title: rankTitle, desc: rankDesc } = RESULT_MAP[rank];
+  return {
+    title: "경제 머머리 테스트",
+    description: `"${rankTitle}", ${rankDesc}`,
+    openGraph: {
+      images: [`/img/${rank}.webp`],
+    },
+  };
+}
 
 export default async function Page({ params }: { params: Params }) {
   const { rank } = await params;
