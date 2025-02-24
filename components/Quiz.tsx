@@ -29,11 +29,9 @@ export default function Quiz({ quiz }: { quiz: QuizType[] }) {
           {/* <Badge variant={"secondary"}>저축,투자</Badge> */}
         </div>
         <div className="flex flex-col items-center break-keep text-md">
-          <div className="text-center text-gray-700 whitespace-pre-wrap ">
+          <div className="text-center text-gray-600 whitespace-pre-wrap ">
             {quiz[currentIndex].content.context}
-            <div className="font-semibold text-gray-900">
-              {currentQuiz.content.question}
-            </div>
+            <div className="text-gray-900">{currentQuiz.content.question}</div>
           </div>
         </div>
       </div>
