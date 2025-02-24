@@ -8,13 +8,13 @@ import { Metadata } from "next";
 const RESULT_MAP: {
   [key in Rank]: { desc: string; title: string };
 } = {
-  bald: {
-    desc: "경제 상식?\n그런 건 머리에서 반짝거리기만 해요!",
-    title: "광택나는 머머리",
+  stone: {
+    desc: "돌 틈 사이에도 희망이 자랄 수 있죠! \n아마도...?",
+    title: "씨앗 품은 돌머리",
   },
-  downy: {
-    desc: "바람 불면\n머리카락이 날아갈지 몰라요.",
-    title: "희미한 솜털머리",
+  desert: {
+    desc: "여기저기 균열이...!\n경제 지식이 싹틀 조짐이 보입니다.",
+    title: "아직은 황무지머리",
   },
   grass: {
     desc: "지식이 자라나고 있지만,\n 아직 사막입니다.",
@@ -29,12 +29,12 @@ const RESULT_MAP: {
     title: "가을볕의 벼머리",
   },
   jungle: {
-    desc: "머리가 이렇게 풍성할 수 있나요? 대단합니다!",
+    desc: "머리가 이렇게 풍성할 수 있나요?\n대단합니다!",
     title: "수풀 가득한 정글머리",
   },
 };
 
-export type Rank = "bald" | "downy" | "grass" | "plant" | "rice" | "jungle";
+export type Rank = "stone" | "desert" | "grass" | "plant" | "rice" | "jungle";
 
 type Params = Promise<{
   rank: Rank;
@@ -43,8 +43,8 @@ type Params = Promise<{
 // 정적 페이지 미리 생성
 export async function generateStaticParams() {
   return [
-    { rank: "bald" },
-    { rank: "downy" },
+    { rank: "stone" },
+    { rank: "desert" },
     { rank: "grass" },
     { rank: "plant" },
     { rank: "rice" },
@@ -75,12 +75,12 @@ export default async function Page({ params }: { params: Params }) {
 
   return (
     <>
-      <span className="absolute top-4 left-[50%] translate-x-[-50%] text-sm bg-white ">
-        경제머머리테스트
+      <span className="absolute top-4 left-[50%] translate-x-[-50%] text-sm  ">
+        경제머리 테스트
       </span>
-      <div className="z-[1] pt-12">
+      <div className="z-[1] pt-12 pb-8 mb-[142px]">
         <div className="flex flex-col items-center ">
-          <div className="text-gray-500 text-lg text-center  whitespace-pre-line">
+          <div className="text-gray-500 text-lg text-center whitespace-pre-line">
             {desc}
           </div>
           <Image
@@ -107,18 +107,18 @@ export default async function Page({ params }: { params: Params }) {
           )}
           <span className="text-3xl font-semibold">{title}</span>
         </div>
-        <div className=" flex flex-col items-center gap-2 w-full px-4 my-8">
-          <Link href="/" className="w-full">
-            <Button size="full" className="text-black" variant={"outline"}>
-              다시 하기
-            </Button>
-          </Link>
-          <ShareButton
-            title={title}
-            description={desc}
-            imageUrl={`${process.env.NEXT_PUBLIC_ROOT_URL}/img/${rank}.webp`}
-          />
-        </div>
+      </div>
+      <div className="absolute bottom-0 flex flex-col items-center gap-[4px] w-full px-4 bottom-[30px] z-[1]">
+        <Link href="/" className="w-full">
+          <Button size="full" className="text-black" variant={"outline"}>
+            다시 하기
+          </Button>
+        </Link>
+        <ShareButton
+          title={title}
+          description={desc}
+          imageUrl={`${process.env.NEXT_PUBLIC_ROOT_URL}/img/${rank}.webp`}
+        />
       </div>
     </>
   );

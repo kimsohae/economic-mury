@@ -7,6 +7,7 @@ import { useUser } from "@/state/UserContext";
 import { Rank } from "@/app/result/[rank]/page";
 import CrossIcon from "@/components/icon/CrossIcon";
 import CheckIcon from "@/components/icon/CheckIcon";
+import Loading from "@/components/Loading";
 
 interface Props {
   options: QuizOption[];
@@ -16,19 +17,19 @@ interface Props {
 
 function getRank(score: number): Rank {
   if (score <= 1) {
-    return "bald";
+    return "stone";
   } else if (score <= 3) {
-    return "downy";
-  } else if (score <= 5) {
+    return "desert";
+  } else if (score <= 4) {
     return "grass";
-  } else if (score <= 7) {
+  } else if (score <= 6) {
     return "plant";
-  } else if (score <= 9) {
+  } else if (score <= 8) {
     return "rice";
   } else if (score <= 10) {
     return "jungle";
   }
-  return "bald";
+  return "stone";
 }
 
 export default function QuizAnswer({
@@ -43,6 +44,7 @@ export default function QuizAnswer({
   } = useUser();
   const [selectedIdx, setSelectedIdx] = React.useState<number | null>(null);
   const [isSubmitted, setIsSubmitted] = React.useState(false);
+  const [isLoading, setIsLoading] = React.useState(false);
   const isCorrect =
     selectedIdx !== null ? options[selectedIdx].isCorrect : false;
 
@@ -57,14 +59,20 @@ export default function QuizAnswer({
       // [1] 점수, 진행도 기록: 맞으면 득점
       const newScore = score + (options[selectedIdx!].isCorrect ? 1 : 0);
       setUser({ score: newScore, progress: progress + (isLastQuiz ? 0 : 1) });
-      setSelectedIdx(null);
-      setIsSubmitted(false);
 
       //  [2] 마지막 문항일 경우, 결과 페이지로 이동
       if (isLastQuiz) {
         const rank = getRank(newScore);
-        replace(`/result/${rank}`);
+        setIsLoading(true);
+        setTimeout(() => {
+          replace(`/result/${rank}`);
+        }, 5000);
+        return;
       }
+
+      // [3] 선택 상태 초기화
+      setSelectedIdx(null);
+      setIsSubmitted(false);
     } else {
       setIsSubmitted(true);
     }
@@ -92,9 +100,9 @@ export default function QuizAnswer({
         <div
           className={`absolute  ${
             isSubmitted
-              ? "translate-y-[-100%] h-[100%] border-t-2 pb-[100px] rounded-3xl"
-              : "translate-y-[0%] h-[0%] border-transparent pb-[0px]"
-          } w-full bg-white border-gray-200 px-4 pt-4  transform transition-all duration-300 ease-in-out`}
+              ? "bottom-[100%] h-fit border-t-2  rounded-t-3xl"
+              : "bottom-[0%] h-[0%] border-transparent"
+          } w-full bg-white border-gray-200 p-4  transform transition-all duration-300  ease-in-out`}
         >
           {isSubmitted && (
             <>
@@ -122,7 +130,7 @@ export default function QuizAnswer({
               <div
                 className={`${
                   isCorrect ? "text-blue-400" : "text-red-400"
-                } mt-2 text-sm`}
+                } mt-2 text-sm whitespace-pre-line`}
               >
                 {explanations}
               </div>
@@ -130,15 +138,23 @@ export default function QuizAnswer({
           )}
         </div>
 
-        <div className="bg-white w-full px-4 pb-[30px] z-10">
+        <div className="bg-white w-full px-4 pb-[30px] z-[1]">
           <Button
             size="full"
             disabled={selectedIdx === null}
             onClick={onClickSubmit}
           >
-            {isSubmitted ? "다음으로" : "선택하기"}
+            {isSubmitted ? (isLastQuiz ? "결과보기" : "다음으로") : "선택하기"}
           </Button>
         </div>
+      </div>
+
+      <div
+        className={`absolute ${
+          isLoading ? " bottom-[0%] h-[100%]" : " bottom-[-100%] h-[0%]"
+        }  left-0 w-full ∂  z-[10] bg-black/70 flex items-center justify-center transform transition-all delay-1 duration-300  ease-in-out`}
+      >
+        {isLoading && <Loading />}
       </div>
     </>
   );

@@ -5,24 +5,31 @@ import Image from "next/image";
 export default function Home() {
   return (
     <>
-      {" "}
-      <div className="relative w-full flex flex-col items-center">
-        <div className="absolute flex flex-col items-center left-[50%] translate-x-[-50%] top-[-44%] w-full">
-          <Image
-            alt="main"
-            // className=""
-            width={300}
-            height={300}
-            src="/img/questionc.png"
+      <div className="relative w-full flex flex-col items-center ">
+        <div className="absolute flex flex-col items-center left-[50%] translate-x-[-50%] top-[-30%] w-full">
+          {/* <Image
             priority
+            className="absolute w-10 animate-[float_3s_infinite_ease-in-out]"
+            width={100}
+            height={150}
+            src="/img/title_question.png"
+            alt="title_question"
+          /> */}
+          <Image
+            priority
+            // className="relative"
+            width={176}
+            height={176}
+            src="/img/title_logo.webp"
+            alt="title_logo"
           />
         </div>
         <Image
-          className="px-8 w-full max-w-[460px] z-[1]"
-          width={663}
-          height={693}
+          className="px-12 w-full max-w-[460px] z-[1] max-h-[100%] "
+          width={463}
+          height={574}
           alt="title"
-          src="/img/murmury_title.png"
+          src="/img/title.png"
           priority
         />
         {/* <div
@@ -35,7 +42,7 @@ export default function Home() {
       </div>
       <div className="absolute bottom-[30px] flex flex-col items-center justify-center w-full">
         <span className="block text-sm text-gray-400 mb-3 font-pretendard">
-          *경제 머머리: 경제머리가 없는 사람
+          내 경제머리는 지금 어떤 모습일까?
         </span>
         <Link href={"/test"} className="w-full px-4">
           <Button size={"full"}>시작하기</Button>
