@@ -10,7 +10,7 @@
         { "id": "o1", "text": "O", "isCorrect": false },
         { "id": "o2", "text": "X", "isCorrect": true }
       ],
-      "explanations": ""
+      "explanations": "환율이 높아지면, 1달러를 사기 위해 더 많은 원화가 필요해요. 즉, 원화의 가치가 떨어진 것으로 볼 수 있어요."
     },
     {
       "id": "5",
@@ -29,7 +29,7 @@
     {
       "id": "qe",
       "content": {
-        "context": "금리 인하를 통한 경기 활성화를 더 이상 기대할 수 없을 때,",
+        "context": "금리 인하를 통한 경기 활성화를\n 더 이상 기대할 수 없을 때,",
         "question": "돈을 풀어 경기 활성화를 노리는 정책은?"
       },
       "options": [
@@ -66,7 +66,7 @@
         { "id": "o3", "text": "만 60세", "isCorrect": false },
         { "id": "o4", "text": "만 65세", "isCorrect": false }
       ],
-      "explanations": "연금저축은 최소 5년 이상 납입 시, 만 55세 이후부터 연금을 수령할 수 있는 상품입니다.  출처: KDI 경제교육・정보센터"
+      "explanations": "연금저축은 최소 5년 이상 납입 시, 만 55세 이후부터 연금을 수령할 수 있는 상품입니다.\n출처: KDI 경제교육・정보센터"
     },
     {
       "id": "6",
@@ -75,11 +75,6 @@
         "question": "퇴직 전에 근로자가 미리 퇴직금을 운용할 수 있는 제도는 무엇일까요?"
       },
       "options": [
-        {
-          "id": "o2",
-          "text": "그런 건 없다",
-          "isCorrect": false
-        },
         {
           "id": "o3",
           "text": "DC형",
@@ -136,7 +131,7 @@
           "isCorrect": false
         }
       ],
-      "explanations": ""
+      "explanations": "시가총액 = 발행 주식 수 * 주식 단가(1주당 시세) \n 출처: KDI 경제교육・정보센터"
     },
     {
       "id": "6",
@@ -147,7 +142,7 @@
       "options": [
         {
           "id": "o4",
-          "text": "배당주를 사도 배당을 못받는 날",
+          "text": "배당금을 받을 권리가 사라지는 날",
           "isCorrect": true
         },
         {
@@ -161,7 +156,7 @@
           "isCorrect": false
         }
       ],
-      "explanations": ""
+      "explanations": "배당락일은 배당금을 받을 권리가 사라지는 날을 뜻합니다. 따라서, 배당금을 받으려면 배당락일 전에 주식을 사야 해요. \n출처: 한국투자 블로그"
     },
 
     {
