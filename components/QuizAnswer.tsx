@@ -4,44 +4,15 @@ import { QuizOption } from "@/app/test/page";
 import { Button } from "@/components/ui/button";
 import { useRouter } from "next/navigation";
 import { useUser } from "@/state/UserContext";
-import { Rank } from "@/app/result/[rank]/page";
 import CrossIcon from "@/components/icon/CrossIcon";
 import CheckIcon from "@/components/icon/CheckIcon";
 import Loading from "@/components/Loading";
+import { getRank } from "@/lib/rank";
 
 interface Props {
   options: QuizOption[];
   explanations: string;
   isLastQuiz: boolean;
-}
-
-/**
- *
- * @param score
- * @returns rank
- *
- * score 0-1 : stone
- * score 2-3 : desert
- * score 4-5 : grass
- * score 6-7 : plant
- * score 8-9 : rice
- * score 10  : jungle
- */
-function getRank(score: number): Rank {
-  if (score <= 1) {
-    return "stone";
-  } else if (score <= 3) {
-    return "desert";
-  } else if (score <= 5) {
-    return "grass";
-  } else if (score <= 7) {
-    return "plant";
-  } else if (score <= 9) {
-    return "rice";
-  } else if (score <= 10) {
-    return "jungle";
-  }
-  return "stone";
 }
 
 export default function QuizAnswer({
