@@ -87,7 +87,7 @@
         },
         {
           "id": "o4",
-          "text": "ISA",
+          "text": "IRP",
           "isCorrect": false
         }
       ],
@@ -101,11 +101,23 @@
       },
       "options": [
         { "id": "o1", "text": "그대로 유지된다", "isCorrect": false },
-        { "id": "o2", "text": "통장: 해지, 가점: 유지", "isCorrect": false },
-        { "id": "o3", "text": "통장: 해지, 가점: 초기화", "isCorrect": true },
-        { "id": "o4", "text": "통장: 유지, 가점: 초기화", "isCorrect": false }
+        {
+          "id": "o2",
+          "text": "통장: 사용 불가, 가점: 유지",
+          "isCorrect": false
+        },
+        {
+          "id": "o3",
+          "text": "통장: 사용 불가, 가점: 초기화",
+          "isCorrect": true
+        },
+        {
+          "id": "o4",
+          "text": "통장: 사용 가능, 가점: 초기화",
+          "isCorrect": false
+        }
       ],
-      "explanations": "청약 당첨이 되면, 계약을 하지 않더라도 통장이 해지되고 그동안 쌓아온 청약 가점도 초기화됩니다."
+      "explanations": "청약 당첨이 되면, 계약을 하지 않더라도 해당 통장은 사용할 수 없고, 그동안 쌓아온 청약 가점도 초기화됩니다."
     },
 
     {
