@@ -41,7 +41,7 @@ export default function ShareButton({ title, description, imageUrl }: Props) {
       const options: ShareOptions = {
         objectType: "feed",
         content: {
-          title: "나의 경제 머리숱 상태는?",
+          title: "나의 경제머리 상태는?",
           description: title,
           imageUrl: imageUrl,
           link: {
@@ -50,6 +50,7 @@ export default function ShareButton({ title, description, imageUrl }: Props) {
           },
         },
       };
+
       window.Kakao.Share.sendDefault(options);
     } else {
       console.error("window.Kakao not found");
@@ -58,8 +59,9 @@ export default function ShareButton({ title, description, imageUrl }: Props) {
 
   return (
     <>
+      <div id="kakaotalk-sharing-btn"></div>
       <Button size="full" onClick={onClickShare}>
-        결과 공유{" "}
+        카톡 공유
       </Button>
       <Script
         src="https://t1.kakaocdn.net/kakao_js_sdk/2.7.4/kakao.min.js"
