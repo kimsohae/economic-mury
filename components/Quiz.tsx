@@ -1,10 +1,8 @@
 "use client";
 import React, { useEffect } from "react";
-import QuizOptions from "@/components/QuizOptions";
 import { Quiz as QuizType } from "@/app/test/page";
 import { initialUser, useUser } from "@/state/UserContext";
 import QuizAnswer from "@/components/QuizAnswer";
-import { Badge } from "@/components/ui/badge";
 
 export default function Quiz({ quiz }: { quiz: QuizType[] }) {
   const {
