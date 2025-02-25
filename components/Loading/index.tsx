@@ -19,7 +19,7 @@ export default function Loading() {
           className=""
           width={176}
           height={176}
-          src="/img/loading.webp"
+          src="/img/loading.png"
           alt="loading"
         />
       </div>
