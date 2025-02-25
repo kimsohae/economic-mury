@@ -31,7 +31,7 @@ export const metadata: Metadata = {
   title: "경제 머머리 테스트",
   description: "나의 경제 머리숱 상태는?",
   openGraph: {
-    images: [`${process.env.NEXT_PUBLIC_ROOT_URL}/img/murmury_title.png`],
+    images: [`${process.env.NEXT_PUBLIC_ROOT_URL}/img/title.png`],
   },
 };
 
