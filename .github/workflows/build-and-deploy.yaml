@@ -2,7 +2,7 @@
 name: Build and Deploy NextJS App to S3 and CloudFront - economic bald
 on:
   push:
-    branches: [main]
+    branches: [without-server]
 # These permissions are needed to interact with GitHub's OIDC Token endpoint.
 permissions:
   id-token: write
