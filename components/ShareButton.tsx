@@ -1,7 +1,7 @@
 "use client";
 import React, { useEffect } from "react";
 import Script from "next/script";
-import { Button } from "@/components/ui/button";
+import { Button, ButtonProps } from "@/components/ui/button";
 
 const KAKAO_JS_KEY = process.env.NEXT_PUBLIC_KAKAO_JS_KEY || "";
 const initKakao = () => {
@@ -28,13 +28,13 @@ export type ShareOptions = {
   }[];
 };
 
-interface Props {
+interface Props extends ButtonProps {
   title: string;
   description: string;
   imageUrl: string;
 }
 
-export default function ShareButton({ title, description, imageUrl }: Props) {
+export default function ShareButton({ title, imageUrl, ...props }: Props) {
   const onClickShare = () => {
     if (window.Kakao) {
       const shareUrl = window.location.href;
@@ -60,7 +60,7 @@ export default function ShareButton({ title, description, imageUrl }: Props) {
   return (
     <>
       <div id="kakaotalk-sharing-btn"></div>
-      <Button size="full" onClick={onClickShare}>
+      <Button size="full" onClick={onClickShare} {...props}>
         카톡 공유
       </Button>
       <Script
