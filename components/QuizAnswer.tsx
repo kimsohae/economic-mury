@@ -1,6 +1,5 @@
 "use client";
-import React from "react";
-import { QuizOption } from "@/app/test/page";
+import React, { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { useRouter } from "next/navigation";
 import { useUser } from "@/state/UserContext";
@@ -8,26 +7,27 @@ import CrossIcon from "@/components/icon/CrossIcon";
 import CheckIcon from "@/components/icon/CheckIcon";
 import Loading from "@/components/Loading";
 import { getRank } from "@/lib/rank";
+import { generateRandomString, LocalStorageUtility } from "@/lib/utils";
+import { Quiz, QuizOption, Rank } from "@/lib/type";
+import { cookies } from "next/headers";
+import { postUserResult } from "@/lib/fetch";
 
 interface Props {
-  options: QuizOption[];
-  explanations: string;
+  currentQuiz: Quiz;
   isLastQuiz: boolean;
 }
 
-export default function QuizAnswer({
-  options,
-  explanations,
-  isLastQuiz,
-}: Props) {
+export default function QuizAnswer({ currentQuiz, isLastQuiz }: Props) {
   const { replace } = useRouter();
   const {
-    user: { progress, score },
+    user: { progress, score, selectedAnswers },
     setUser,
   } = useUser();
-  const [selectedIdx, setSelectedIdx] = React.useState<number | null>(null);
-  const [isSubmitted, setIsSubmitted] = React.useState(false);
-  const [isLoading, setIsLoading] = React.useState(false);
+  const { id, options, explanations } = currentQuiz;
+
+  const [selectedIdx, setSelectedIdx] = useState<number | null>(null);
+  const [isSubmitted, setIsSubmitted] = useState<boolean>(false);
+  const [isLoading, setIsLoading] = useState<boolean>(false);
   const isCorrect =
     selectedIdx !== null ? options[selectedIdx].isCorrect : false;
 
@@ -36,19 +36,40 @@ export default function QuizAnswer({
     setSelectedIdx(idx);
   };
 
-  const onClickSubmit = () => {
+  const onClickSubmit = async () => {
     if (isSubmitted) {
       // 선택지 초기화 후 다음 문제로 넘어간다
       // [1] 점수, 진행도 기록: 맞으면 득점
-      const newScore = score + (options[selectedIdx!].isCorrect ? 1 : 0);
-      setUser({ score: newScore, progress: progress + (isLastQuiz ? 0 : 1) });
+      const newScore = score + (isCorrect ? 1 : 0);
+      const newProgress = progress + (isLastQuiz ? 0 : 1);
+      const newAnswers = [
+        ...selectedAnswers,
+        {
+          quizId: id,
+          optionId: options[selectedIdx!].id,
+          isCorrect,
+        },
+      ];
+      const updatedUser = {
+        score: newScore,
+        progress: newProgress,
+        selectedAnswers: newAnswers,
+      };
+      setUser(updatedUser);
 
       //  [2] 마지막 문항일 경우, 결과 페이지로 이동
       if (isLastQuiz) {
         const rank = getRank(newScore);
+        const userId = generateRandomString();
+        const result = await postUserResult(userId, updatedUser);
+        console.log(result);
+        // 결과 입력(POST 요청)
+        document.cookie = `userId=${userId};path=/`;
+        LocalStorageUtility.setItem<Rank>("rank", rank);
+
         setIsLoading(true);
         setTimeout(() => {
-          replace(`/result/${rank}`);
+          replace(`/result/${userId}`);
         }, 5000);
         return;
       }
