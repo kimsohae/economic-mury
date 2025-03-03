@@ -8,8 +8,8 @@
         "question": "환율이 높아지면 원화의 가치가 높아질까요?"
       },
       "options": [
-        { "id": "o1", "text": "O", "isCorrect": false },
-        { "id": "o2", "text": "X", "isCorrect": true }
+        { "id": "1", "text": "O", "isCorrect": false },
+        { "id": "2", "text": "X", "isCorrect": true }
       ],
       "explanations": "환율이 높아지면, 1달러를 사기 위해 더 많은 원화가 필요해요. 즉, 원화의 가치가 떨어진 것으로 볼 수 있어요."
     },
@@ -21,9 +21,9 @@
         "question": "우리나라에서 기준금리를 결정하는 기관은 어디일까요?"
       },
       "options": [
-        { "id": "o3", "text": "한국은행", "isCorrect": true },
-        { "id": "o4", "text": "금융감독원", "isCorrect": false },
-        { "id": "o5", "text": "기획재정부", "isCorrect": false }
+        { "id": "3", "text": "한국은행", "isCorrect": true },
+        { "id": "4", "text": "금융감독원", "isCorrect": false },
+        { "id": "5", "text": "기획재정부", "isCorrect": false }
       ],
       "explanations": "한국은행에서 기준금리를 결정합니다."
     },
@@ -35,9 +35,9 @@
         "question": "돈을 풀어 경기 활성화를 노리는 정책은?"
       },
       "options": [
-        { "id": "o6", "text": "긴축 재정", "isCorrect": false },
-        { "id": "o7", "text": "금리 인상", "isCorrect": false },
-        { "id": "o8", "text": "양적 완화", "isCorrect": true }
+        { "id": "6", "text": "긴축 재정", "isCorrect": false },
+        { "id": "7", "text": "금리 인상", "isCorrect": false },
+        { "id": "8", "text": "양적 완화", "isCorrect": true }
       ],
       "explanations": "중앙 은행에서, 국공채나 회사채 등을 매입해 시중에 유동성을 공급하는 것을 양적 완화라고 합니다."
     },
@@ -49,10 +49,10 @@
         "question": "은행이 파산하면, 내 예금은 얼마까지 보호될까요?"
       },
       "options": [
-        { "id": "o9", "text": "3,000만 원", "isCorrect": false },
-        { "id": "o10", "text": "5,000만 원", "isCorrect": true },
-        { "id": "o11", "text": "1억 원", "isCorrect": false },
-        { "id": "o12", "text": "1억 5,000만 원", "isCorrect": false }
+        { "id": "9", "text": "3,000만 원", "isCorrect": false },
+        { "id": "10", "text": "5,000만 원", "isCorrect": true },
+        { "id": "11", "text": "1억 원", "isCorrect": false },
+        { "id": "12", "text": "1억 5,000만 원", "isCorrect": false }
       ],
       "explanations": "예금자 보호법에 의해, 원금과 이자를 포함하여 1인 최고 5,000만 원까지 예금이 보호됩니다."
     },
@@ -64,10 +64,10 @@
         "question": "연금저축 시, 몇 살부터 연금을 받을 수 있을까요?"
       },
       "options": [
-        { "id": "o13", "text": "만 50세", "isCorrect": false },
-        { "id": "o14", "text": "만 55세", "isCorrect": true },
-        { "id": "o15", "text": "만 60세", "isCorrect": false },
-        { "id": "o16", "text": "만 65세", "isCorrect": false }
+        { "id": "13", "text": "만 50세", "isCorrect": false },
+        { "id": "14", "text": "만 55세", "isCorrect": true },
+        { "id": "15", "text": "만 60세", "isCorrect": false },
+        { "id": "16", "text": "만 65세", "isCorrect": false }
       ],
       "explanations": "연금저축은 최소 5년 이상 납입 시, 만 55세 이후부터 연금을 수령할 수 있는 상품입니다.\n출처: KDI 경제교육・정보센터"
     },
@@ -79,9 +79,9 @@
         "question": "퇴직 전에 근로자가 미리 퇴직금을 운용할 수 있는 제도는 무엇일까요?"
       },
       "options": [
-        { "id": "o17", "text": "DC형", "isCorrect": true },
-        { "id": "o18", "text": "DB형", "isCorrect": false },
-        { "id": "o19", "text": "IRP", "isCorrect": false }
+        { "id": "17", "text": "DC형", "isCorrect": true },
+        { "id": "18", "text": "DB형", "isCorrect": false },
+        { "id": "19", "text": "IRP", "isCorrect": false }
       ],
       "explanations": "DC형(확정기여형) 연금제도에서 근로자는 직접 적립금을 운용하며, 근로자의 퇴직급여는 운용수익률에 따라 변동될 수 있습니다."
     },
@@ -93,19 +93,19 @@
         "question": "당첨을 포기하면, A의 청약 통장과 청약 가점은 어떻게 될까요?"
       },
       "options": [
-        { "id": "o20", "text": "그대로 유지된다", "isCorrect": false },
+        { "id": "20", "text": "그대로 유지된다", "isCorrect": false },
         {
-          "id": "o21",
+          "id": "21",
           "text": "통장: 사용 불가, 가점: 유지",
           "isCorrect": false
         },
         {
-          "id": "o22",
+          "id": "22",
           "text": "통장: 사용 불가, 가점: 초기화",
           "isCorrect": true
         },
         {
-          "id": "o23",
+          "id": "23",
           "text": "통장: 사용 가능, 가점: 초기화",
           "isCorrect": false
         }
@@ -120,10 +120,10 @@
         "question": "시가총액은 어떻게 계산할까요?"
       },
       "options": [
-        { "id": "o24", "text": "기업이 보유한 현금 총액", "isCorrect": false },
-        { "id": "o25", "text": "발행 주식 수 x 주식 가격", "isCorrect": true },
+        { "id": "24", "text": "기업이 보유한 현금 총액", "isCorrect": false },
+        { "id": "25", "text": "발행 주식 수 x 주식 가격", "isCorrect": true },
         {
-          "id": "o26",
+          "id": "26",
           "text": "연간 순이익 x 주가수익비율",
           "isCorrect": false
         }
@@ -139,16 +139,16 @@
       },
       "options": [
         {
-          "id": "o27",
+          "id": "27",
           "text": "배당금을 받을 권리가 사라지는 날",
           "isCorrect": true
         },
         {
-          "id": "o28",
+          "id": "28",
           "text": "배당 기업의 시가총액이 떨어진 날",
           "isCorrect": false
         },
-        { "id": "o29", "text": "배당금의 크기가 떨어진 날", "isCorrect": false }
+        { "id": "29", "text": "배당금의 크기가 떨어진 날", "isCorrect": false }
       ],
       "explanations": "배당락일은 배당금을 받을 권리가 사라지는 날을 뜻합니다. 따라서, 배당금을 받으려면 배당락일 전에 주식을 사야 해요. \n출처: 한국투자 블로그"
     },
@@ -160,10 +160,10 @@
         "question": "세계 3대 신용평가기관이 아닌 곳은?"
       },
       "options": [
-        { "id": "o30", "text": "무디스(Moody's)", "isCorrect": false },
-        { "id": "o31", "text": "블룸버그(Bloomberg)", "isCorrect": true },
-        { "id": "o32", "text": "스탠다드앤푸어스(S&P)", "isCorrect": false },
-        { "id": "o33", "text": "피치(Fitch)", "isCorrect": false }
+        { "id": "30", "text": "무디스(Moody's)", "isCorrect": false },
+        { "id": "31", "text": "블룸버그(Bloomberg)", "isCorrect": true },
+        { "id": "32", "text": "스탠다드앤푸어스(S&P)", "isCorrect": false },
+        { "id": "33", "text": "피치(Fitch)", "isCorrect": false }
       ],
       "explanations": "영국의 피치, 미국의 무디스, 스탠다드앤드푸어스는 세계 금융시장의 3대 신용평가기관으로 꼽힙니다."
     }
