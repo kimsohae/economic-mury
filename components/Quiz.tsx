@@ -1,6 +1,6 @@
 "use client";
 import React, { useEffect } from "react";
-import { Quiz as QuizType } from "@/app/test/page";
+import { Quiz as QuizType } from "@/lib/type";
 import { initialUser, useUser } from "@/state/UserContext";
 import QuizAnswer from "@/components/QuizAnswer";
 
@@ -33,11 +33,7 @@ export default function Quiz({ quiz }: { quiz: QuizType[] }) {
           </div>
         </div>
       </div>
-      <QuizAnswer
-        options={currentQuiz.options}
-        explanations={currentQuiz.explanations}
-        isLastQuiz={isLastQuiz}
-      />
+      <QuizAnswer currentQuiz={currentQuiz} isLastQuiz={isLastQuiz} />
     </section>
   );
 }

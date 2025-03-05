@@ -6,11 +6,9 @@ import { useUser } from "@/state/UserContext";
 import CrossIcon from "@/components/icon/CrossIcon";
 import CheckIcon from "@/components/icon/CheckIcon";
 import Loading from "@/components/Loading";
-import { getRank } from "@/lib/rank";
 import { generateRandomString, LocalStorageUtility } from "@/lib/utils";
-import { Quiz, QuizOption, Rank } from "@/lib/type";
-import { cookies } from "next/headers";
-import { postUserResult } from "@/lib/fetch";
+import { Quiz, QuizOption, UserResult } from "@/lib/type";
+import { updateUserResult } from "@/lib/fetch";
 
 interface Props {
   currentQuiz: Quiz;
@@ -59,15 +57,12 @@ export default function QuizAnswer({ currentQuiz, isLastQuiz }: Props) {
 
       //  [2] 마지막 문항일 경우, 결과 페이지로 이동
       if (isLastQuiz) {
-        const rank = getRank(newScore);
         const userId = generateRandomString();
-        const result = await postUserResult(userId, updatedUser);
-        console.log(result);
-        // 결과 입력(POST 요청)
         document.cookie = `userId=${userId};path=/`;
-        LocalStorageUtility.setItem<Rank>("rank", rank);
-
         setIsLoading(true);
+        // 결과 입력(POST 요청)
+        const result = await updateUserResult(userId, updatedUser);
+        LocalStorageUtility.setItem<UserResult>("result", result);
         setTimeout(() => {
           replace(`/result/${userId}`);
         }, 5000);
@@ -156,7 +151,7 @@ export default function QuizAnswer({ currentQuiz, isLastQuiz }: Props) {
       <div
         className={`absolute ${
           isLoading ? " bottom-[0%] h-[100%]" : " bottom-[-100%] h-[0%]"
-        }  left-0 w-full ∂  z-[10] bg-black/70 flex items-center justify-center transform transition-all delay-1 duration-300  ease-in-out`}
+        }  left-0 w-full z-[10] bg-black/70 flex items-center justify-center transform transition-all delay-1 duration-300  ease-in-out`}
       >
         {isLoading && <Loading />}
       </div>

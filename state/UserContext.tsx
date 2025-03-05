@@ -1,4 +1,5 @@
 "use client";
+import { User } from "@/lib/type";
 import React, {
   createContext,
   Dispatch,
@@ -6,11 +7,6 @@ import React, {
   useContext,
   useState,
 } from "react";
-
-type User = {
-  progress: number; // 진행도 0~1
-  score: number; // 점수
-};
 
 type UserContextType = {
   user: User;
@@ -21,6 +17,7 @@ const UserContext = createContext<UserContextType | null>(null);
 export const initialUser: User = {
   progress: 0,
   score: 0,
+  selectedAnswers: [],
 };
 
 export function UserProvider({ children }: { children: React.ReactNode }) {

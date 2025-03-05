@@ -16,6 +16,7 @@ export type Rank = typeof RANKS[number];
  * score 10  : jungle
  */
 
+
  export function getRank(score: number): Rank {
     if (score <= 1) {
       return "stone";

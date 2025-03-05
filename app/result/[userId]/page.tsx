@@ -1,5 +1,5 @@
 import React from "react";
-import { getUserResult } from "@/lib/fetch";
+import { fetchUserResult } from "@/lib/fetch";
 import { cookies } from "next/headers";
 import ClientResult from "@/components/ClientResult";
 import Result from "@/components/Result";
@@ -38,7 +38,7 @@ export default async function Page({ params }: { params: Params }) {
     return <ClientResult />;
   }
   // 테스트 미진행 : SSR
-  const rank = (await getUserResult(userIdFromUrl)).rank;
+  const userResult = await fetchUserResult(userIdFromUrl);
 
-  return <Result rank={"jungle"} />;
+  return <Result userResult={userResult} />;
 }
