@@ -26,8 +26,6 @@ export async function POST(req:NextRequest, {params}: {params: Promise<{userId:s
         const ranking = await getUserRanking(userId);
         const wrongAnswers = await getWrongAnswerWithCorrectRate(userId);
 
-        console.log({wrongAnswers});
-
         return new Response(JSON.stringify({
             score,
             rank: getRank(score),
@@ -47,7 +45,6 @@ export async function POST(req:NextRequest, {params}: {params: Promise<{userId:s
 
 
 async function insertUser(userId:string, score:number) {
-    console.log(userId, score)
     const result = await db.query(`INSERT INTO "user" (id, score)
      VALUES ('${userId}',${score})`);
     return result;

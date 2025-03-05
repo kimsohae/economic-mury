@@ -26,7 +26,6 @@ async function fetchRetry(url:RequestInfo, init?:RequestInit) {
 
 
 export async function fetchUserResult(user:string):Promise<UserResult> {
-    console.log('fetchUserResult')
     const response = await fetchRetry(`/result/${user}`);
 
     if (!response) {
