@@ -80,7 +80,7 @@ export default function Result({ userResult }: Props) {
             title={title}
             description={desc}
             variant={"outline"}
-            className="text-black w-[50%] bg-[#FEE500] border-none "
+            className="text-black w-[50%] bg-[#FEE500] border-none hover:bg-[#FEE500]/80"
             imageUrl={`${process.env.NEXT_PUBLIC_ROOT_URL}/img/${rank}.webp`}
           />
         </div>

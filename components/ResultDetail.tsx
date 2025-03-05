@@ -3,8 +3,11 @@ import React, { useEffect, useState } from "react";
 import ArrowIcon from "@/components/icon/ArrowIcon";
 import { Answer, UserResult } from "@/lib/type";
 import { RESULT_MAP } from "@/lib/rank";
-import quizData from "@/public/questions.json";
 import Image from "next/image";
+import { LocalStorageUtility } from "@/lib/utils";
+import { Button } from "./ui/button";
+import Link from "next/link";
+import ReviewNote from "./ReviewNote";
 
 interface Props {
   isDetailShown: boolean;
@@ -14,13 +17,19 @@ interface Props {
 
 export default function ResultDetail({
   setIsDetailShown,
-  userResult: { rank, score, ranking, wrongAnswers },
+  userResult: {
+    rank,
+    score,
+    ranking: { total, position },
+    wrongAnswers,
+  },
 }: Props) {
   const { title } = RESULT_MAP[rank];
-  const quizList = quizData.quiz;
+
+  const isTestProceeded =
+    typeof window !== "undefined" && LocalStorageUtility.getItem("result");
 
   const onClickClose = () => {
-    console.log(setIsDetailShown);
     setIsDetailShown(false);
   };
 
@@ -48,41 +57,32 @@ export default function ResultDetail({
           <span>10문제 중 {score}문제를 맞혔어요. </span>
           <br />
           <span>
-            총 {ranking.total}명 중{" "}
-            <span className="text-primary">{ranking.position}</span>등입니다.
+            총 {total}명 중 <span className="text-primary">{position}</span>
+            등입니다.
           </span>
         </div>
       </div>
-      <div>
+      <div className="w-full">
         <span className="ml-6 text-lg">오답 노트</span>
-        <div className="flex flex-col border border-gray-200 rounded-3xl p-4 mx-4 gap-2 my-2">
-          {wrongAnswers &&
-            wrongAnswers.map((answer: Answer, index: number) => {
-              // 현재 데이터셋에서 quizList 인덱스 -1과 quiz Id 동일
-              // 퀴즈 추가 등 확장 시 quizId로 바로 접근할 수 있도록 데이터구조 변경 필요
-              const wrongAnswer = quizList[Number(answer.quizId) - 1];
-              const { id, category, content, options, explanations } =
-                wrongAnswer;
-              const rightOption = options.filter(
-                (option) => option.isCorrect
-              )[0];
-              return (
-                <div key={index}>
-                  <div className="break-keep">
-                    {id}. {content.question}{" "}
-                    <div className="inline text-gray-400 text-xs border border-gray-200 rounded-3xl py-1 px-2 w-fit">
-                      정답률&nbsp;{Number(answer.correctRate).toFixed(1)}%
-                    </div>
-                  </div>
-
-                  <div className="break-keep">
-                    <span className="text-primary"> → {rightOption.text}</span>
-                  </div>
-
-                  <div className="text-gray-400 text-sm"> {explanations}</div>
-                </div>
-              );
-            })}
+        <div className=" border border-gray-200 rounded-3xl p-4 mx-4 mt-2 mb-6 w-auto">
+          {isTestProceeded ? (
+            <ReviewNote wrongAnswers={wrongAnswers} total={total} />
+          ) : (
+            <div className="h-60 flex flex-col items-center justify-center gap-4 text-gray-500">
+              <p className="text-center">
+                <span className="">오답노트는</span>
+                <br />
+                <span>테스트를 진행한 분에게만 공개됩니다.</span>
+              </p>
+              <div className="w-full max-w-[300px]">
+                <Link href="/">
+                  <Button variant="default" size="full" className="">
+                    테스트 하기
+                  </Button>
+                </Link>
+              </div>
+            </div>
+          )}
         </div>
       </div>
     </div>
