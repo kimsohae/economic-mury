@@ -2,19 +2,20 @@
 import React, { use, useEffect, useState } from "react";
 import Result from "@/components/Result";
 import { LocalStorageUtility } from "@/lib/utils";
-import { Rank } from "@/lib/type";
+import { Rank, UserResult } from "@/lib/type";
+import { fetchUserResult } from "@/lib/fetch";
 
 export default function ClientResult() {
-  const [rank, setRank] = useState<Rank>();
+  const [userResult, setUserResult] = useState<UserResult>();
   useEffect(() => {
-    const storedRank = LocalStorageUtility.getItem<Rank>("rank");
-    if (storedRank) {
-      setRank(storedRank);
+    const storedResult = LocalStorageUtility.getItem<UserResult>("result");
+    if (storedResult) {
+      setUserResult(storedResult);
     }
-  });
+  }, []);
 
-  if (rank) {
-    return <Result rank={rank} />;
+  if (userResult) {
+    return <Result userResult={userResult} />;
   }
 
   return <></>;
