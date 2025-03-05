@@ -1,7 +1,7 @@
 import { User, UserResult } from "@/lib/type";
-const RETRY_COUNT = 3;
+const RETRY_COUNT = 1;
 
-async function fetchRetry(url:RequestInfo, init?:RequestInit) {
+async function fetchRetry(url:RequestInfo, init?:RequestInit, delay=1000) {
     let retry = RETRY_COUNT;
     while(retry > 0) {
         try{  
@@ -13,6 +13,7 @@ async function fetchRetry(url:RequestInfo, init?:RequestInit) {
             if(!response.ok) {
                 console.error(`HTTP error! Status: ${response.status}`);
                 retry -= 1;
+                await new Promise(resolve => setTimeout(resolve, delay));
                 continue;
             }
             return response;
@@ -20,6 +21,7 @@ async function fetchRetry(url:RequestInfo, init?:RequestInit) {
             console.error(`Fetch attemp failed`, error);
         }
         retry -= 1;
+        await new Promise(resolve => setTimeout(resolve, delay));
     }
     return null // 최종 실패 시 null 반환
 }
