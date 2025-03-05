@@ -26,7 +26,7 @@ export default function Result({ userResult }: Props) {
 
   return (
     <>
-      <span className="absolute top-4 left-[50%] translate-x-[-50%] text-sm z-[2] ">
+      <span className="absolute top-4 left-[50%] translate-x-[-50%] text-md z-[2] ">
         경제머리 테스트
       </span>
 
@@ -85,13 +85,13 @@ export default function Result({ userResult }: Props) {
           />
         </div>
       </div>
-      {isDetailShown && (
-        <ResultDetail
-          isDetailShown={isDetailShown}
-          setIsDetailShown={setIsDetailShown}
-          userResult={userResult}
-        />
-      )}
+      {/* {isDetailShown && ( */}
+      <ResultDetail
+        isDetailShown={isDetailShown}
+        setIsDetailShown={setIsDetailShown}
+        userResult={userResult}
+      />
+      {/* )} */}
     </>
   );
 }

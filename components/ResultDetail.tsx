@@ -16,6 +16,7 @@ interface Props {
 }
 
 export default function ResultDetail({
+  isDetailShown,
   setIsDetailShown,
   userResult: {
     rank,
@@ -25,17 +26,29 @@ export default function ResultDetail({
   },
 }: Props) {
   const { title } = RESULT_MAP[rank];
+  const [isTestProceeded, setIsTestProceeded] = useState<boolean>();
 
-  const isTestProceeded =
-    typeof window !== "undefined" && LocalStorageUtility.getItem("result");
+  useEffect(() => {
+    if (LocalStorageUtility.getItem("result")) {
+      setIsTestProceeded(true);
+    } else {
+      setIsTestProceeded(false);
+    }
+  }, []);
 
   const onClickClose = () => {
     setIsDetailShown(false);
   };
 
   return (
-    <div className="absolute h-[100%] w-[100%] flex flex-col items-center bg-white z-10 rounded-t-2xl overflow-scroll">
-      <div className="fixed max-w-[540px] w-[100%] top-0 bg-white">
+    <div
+      className={`absolute ${
+        isDetailShown
+          ? "right-[0%] opacity-[100%] "
+          : "right-[-100%] opacity-[0%] "
+      } h-[100%] w-[100%] flex flex-col items-center bg-white z-10 rounded-t-2xl overflow-scroll transition-all delay-1 duration-150  ease-in-out`}
+    >
+      <div className="fixed max-w-[540px] w-[100%] top-0 bg-white border-b border-gray-200">
         <div className="relative w-[100%]  my-4 h-[28px] flex flex-row items-center justify-center">
           <button onClick={() => onClickClose()}>
             <ArrowIcon className="w-[24px] h-[24px] absolute top-0 left-4" />
@@ -43,7 +56,7 @@ export default function ResultDetail({
           {title}
         </div>
       </div>
-      <div className="flex flex-col items-center mt-10">
+      <div className="flex flex-col items-center mt-14">
         <Image
           width={200}
           height={200}
