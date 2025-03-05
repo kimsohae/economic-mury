@@ -4,8 +4,8 @@
       "id": "1",
       "category": "국제",
       "content": {
-        "context": "",
-        "question": "환율이 높아지면 원화의 가치가 높아질까요?"
+        "context": "달러 대비 원화 기준으로,",
+        "question": "환율이 높아지면 원화의 가치도 높아질까요?"
       },
       "options": [
         { "id": "1", "text": "O", "isCorrect": false },
