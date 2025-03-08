@@ -1,3 +1,4 @@
+// import Instruction from "@/components/Instruction";
 import MainScreen from "@/components/MainScreen";
 import { UserProvider } from "@/state/UserContext";
 import type { Metadata } from "next";
@@ -31,7 +32,7 @@ export const metadata: Metadata = {
   title: "경제 머리 테스트",
   description: "나의 경제 머리 상태는?",
   openGraph: {
-    images: [`${process.env.NEXT_PUBLIC_ROOT_URL}/img/title.png`],
+    images: [`${process.env.NEXT_PUBLIC_ROOT_URL}/img/OG.png`],
   },
 };
 
@@ -47,6 +48,7 @@ export default function RootLayout({
       >
         <UserProvider>
           <MainScreen>{children}</MainScreen>
+          {/* <Instruction /> */}
         </UserProvider>
       </body>
     </html>
