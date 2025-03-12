@@ -1,34 +1,38 @@
 import React from "react";
-import { Answer } from "@/lib/type";
-import quizData from "@/public/questions.json";
+import { Quiz } from "@/lib/type";
+import { Badge } from "@/components/ui/badge";
+import CategoryBadge from "@/components/CategoryBadge";
 
 interface Props {
-  wrongAnswers: Answer[];
+  wrongQuizList: Quiz[];
   total: number;
 }
-export default function ReviewNote({ wrongAnswers, total }: Props) {
-  const quizList = quizData.quiz;
+export default function ReviewNote({ wrongQuizList, total }: Props) {
   return (
-    <div className="flex flex-col gap-6">
-      {wrongAnswers && wrongAnswers.length ? (
-        wrongAnswers.map((answer: Answer, index: number) => {
-          // 현재 데이터셋에서 quizList 인덱스 -1과 quiz Id 동일
-          // 퀴즈 추가 등 확장 시 quizId로 바로 접근할 수 있도록 데이터구조 변경 필요
-          const wrongAnswer = quizList[Number(answer.quizId) - 1];
-          const { id, content, options, explanations } = wrongAnswer;
+    <div className="flex flex-col gap-8">
+      {wrongQuizList && wrongQuizList.length ? (
+        wrongQuizList.map((quiz: Quiz, index: number) => {
+          const { id, content, options, explanations, correctRate, category } =
+            quiz;
           const rightOption = options.filter((option) => option.isCorrect)[0];
           return (
             <div key={index}>
               <div className="break-keep">
                 {id}. {content.question}{" "}
+                {/* <div className="font-pretendard inline text-gray-400 text-xs bg-red-300/20 rounded-3xl py-1 px-2 w-fit mr-1">
+                  {category}
+                </div> */}
+                {category && (
+                  <CategoryBadge category={category} className={"mr-1"} />
+                )}
                 {total >= 10 && (
-                  <div className="inline text-gray-400 text-xs border border-gray-200 rounded-3xl py-1 px-2 w-fit">
-                    정답률&nbsp;{Number(answer.correctRate).toFixed(1)}%
-                  </div>
+                  <Badge variant={"outline"}>
+                    정답률&nbsp;{Number(correctRate).toFixed(1)}%
+                  </Badge>
                 )}
               </div>
 
-              <div className="break-keep">
+              <div className="break-keep my-1">
                 <span className="text-primary"> → {rightOption.text}</span>
               </div>
 

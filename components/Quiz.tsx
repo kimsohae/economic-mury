@@ -3,6 +3,7 @@ import React, { useEffect } from "react";
 import { Quiz as QuizType } from "@/lib/type";
 import { initialUser, useUser } from "@/state/UserContext";
 import QuizAnswer from "@/components/QuizAnswer";
+import CategoryBadge from "@/components/CategoryBadge";
 
 export default function Quiz({ quiz }: { quiz: QuizType[] }) {
   const {
@@ -24,7 +25,7 @@ export default function Quiz({ quiz }: { quiz: QuizType[] }) {
           <span className="text-xl font-bold text-center text-primary">
             Q{currentIndex + 1}
           </span>
-          {/* <Badge variant={"secondary"}>저축,투자</Badge> */}
+          <CategoryBadge category={currentQuiz.category} />
         </div>
         <div className="flex flex-col items-center break-keep text-md">
           <div className="text-center text-gray-600 whitespace-pre-wrap ">
