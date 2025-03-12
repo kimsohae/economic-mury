@@ -14,6 +14,7 @@ export type User = {
 export const RANKS = ["stone", "desert", "grass", "plant", "rice", "jungle"] as const;
 export type Rank = typeof RANKS[number];
 
+export type Category = 'macro' | 'savings' | 'pension' | 'realEstate' | 'stocks' | 'finance';
 export type QuizOption = {
     id: string;
     text: string;
@@ -28,13 +29,14 @@ export type Quiz = {
     };
     options: QuizOption[];
     explanations: string;
-    category?: string;
+    category: Category;
     correctRate?: number;
 };
 
 
 /** API RESPONSE */
 export type UserResult = {
+    id: string;
     score: number;
     rank: Rank;
     ranking: {

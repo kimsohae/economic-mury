@@ -2,7 +2,7 @@
   "quiz": [
     {
       "id": "1",
-      "category": "국제",
+      "category": "macro",
       "content": {
         "context": "달러 대비 원화 기준으로,",
         "question": "환율이 높아지면 원화의 가치도 높아질까요?"
@@ -15,7 +15,7 @@
     },
     {
       "id": "2",
-      "category": "국가 경제",
+      "category": "macro",
       "content": {
         "context": "금리는 경제 전반에 영향을 미칩니다.",
         "question": "우리나라에서 기준금리를 결정하는 기관은 어디일까요?"
@@ -29,7 +29,7 @@
     },
     {
       "id": "3",
-      "category": "금리",
+      "category": "macro",
       "content": {
         "context": "금리 인하를 통한 경기 활성화를\n 더 이상 기대할 수 없을 때,",
         "question": "돈을 풀어 경기 활성화를 노리는 정책은?"
@@ -43,7 +43,7 @@
     },
     {
       "id": "4",
-      "category": "저축",
+      "category": "savings",
       "content": {
         "context": "",
         "question": "은행이 파산하면, 내 예금은 얼마까지 보호될까요?"
@@ -58,7 +58,7 @@
     },
     {
       "id": "5",
-      "category": "연금",
+      "category": "pension",
       "content": {
         "context": "연금저축은 노후를 준비하기 위한 대표적인 상품이죠!",
         "question": "연금저축 시, 몇 살부터 연금을 받을 수 있을까요?"
@@ -73,7 +73,7 @@
     },
     {
       "id": "6",
-      "category": "연금",
+      "category": "pension",
       "content": {
         "context": "퇴직연금 제도 중,",
         "question": "퇴직 전에 근로자가 미리 퇴직금을 운용할 수 있는 제도는 무엇일까요?"
@@ -87,7 +87,7 @@
     },
     {
       "id": "7",
-      "category": "부동산",
+      "category": "realEstate",
       "content": {
         "context": "A는 청약에 당첨됐어요.\n그런데 계약금이 없어 포기를 고민 중이에요.",
         "question": "당첨을 포기하면, A의 청약 통장과 청약 가점은 어떻게 될까요?"
@@ -114,7 +114,7 @@
     },
     {
       "id": "8",
-      "category": "주식·투자",
+      "category": "stocks",
       "content": {
         "context": "기업의 가치를 시가총액으로 평가하곤 합니다",
         "question": "시가총액은 어떻게 계산할까요?"
@@ -132,7 +132,7 @@
     },
     {
       "id": "9",
-      "category": "주식·투자",
+      "category": "stocks",
       "content": {
         "context": "배당락일에는 배당주의 주가가 낮아지곤 합니다.",
         "question": "'배당락일'의 뜻은 무엇일까요?"
@@ -154,7 +154,7 @@
     },
     {
       "id": "10",
-      "category": "국가 경제",
+      "category": "finance",
       "content": {
         "context": "개인처럼 국가도 신용평가를 받는데요.\n세계 3대 신용평가기관에서 국가의 신용을 평가하고 있습니다.",
         "question": "세계 3대 신용평가기관이 아닌 곳은?"
