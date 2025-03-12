@@ -17,15 +17,23 @@ export default function Home() {
           /> */}
           <Image
             priority
-            // className="relative"
+            className="animate-[float_3s_infinite_ease-in-out]"
             width={176}
             height={176}
             src="/img/title_logo.webp"
             alt="title_logo"
           />
+          {/* <Image
+            priority
+            // className="animate-[float_3s_infinite_ease-in-out]"
+            width={300}
+            height={300}
+            src="/img/instruction_3.png"
+            alt="title_logo"
+          /> */}
         </div>
         <Image
-          className="px-12 w-full max-w-[460px] z-[1] max-h-[100%] "
+          className="px-12 w-full  max-w-[460px] z-[1] max-h-[100%] "
           width={463}
           height={574}
           alt="title"
