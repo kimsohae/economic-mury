@@ -1,13 +1,16 @@
 "use client";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import ArrowIcon from "@/components/icon/ArrowIcon";
-import { Answer, UserResult } from "@/lib/type";
+import { Answer, Quiz, UserResult } from "@/lib/type";
 import { RESULT_MAP } from "@/lib/rank";
 import Image from "next/image";
 import { LocalStorageUtility } from "@/lib/utils";
-import { Button } from "./ui/button";
+import { Button } from "@/components/ui/button";
 import Link from "next/link";
-import ReviewNote from "./ReviewNote";
+import ReviewNote from "@/components/ReviewNote";
+import Analysis from "@/components/Analysis";
+import quizData from "@/public/questions.json";
+import CategoryBadge from "@/components/CategoryBadge";
 
 interface Props {
   isDetailShown: boolean;
@@ -15,18 +18,38 @@ interface Props {
   userResult: UserResult;
 }
 
+const quizList = quizData.quiz;
+
 export default function ResultDetail({
   isDetailShown,
   setIsDetailShown,
-  userResult: {
+  userResult,
+}: Props) {
+  const {
+    id,
     rank,
     score,
     ranking: { total, position },
     wrongAnswers,
-  },
-}: Props) {
+  } = userResult;
   const { title } = RESULT_MAP[rank];
   const [isTestProceeded, setIsTestProceeded] = useState<boolean>();
+
+  // 현재 데이터셋에서 quizList 인덱스 -1과 quiz Id 동일
+  // 퀴즈 추가 등 확장 시 quizId로 바로 접근할 수 있도록 데이터구조 변경 필요
+  const wrongQuizList = useMemo(
+    () =>
+      wrongAnswers.map((answer: Answer) => {
+        const quiz: Quiz = quizList[Number(answer.quizId) - 1];
+        quiz.correctRate = answer.correctRate;
+        return quiz;
+      }),
+    [wrongAnswers]
+  );
+
+  const uniqueCategory = [
+    ...new Set(wrongQuizList.map((item) => item.category!!)),
+  ];
 
   useEffect(() => {
     if (LocalStorageUtility.getItem("result")) {
@@ -66,7 +89,7 @@ export default function ResultDetail({
         <div className="text-gray-500 text-sm px-6 py-1 border border-gray-200 rounded-3xl">
           정답 <span className="text-primary">{score}개</span>
         </div>
-        <div className="text-center mt-6 mb-10">
+        <div className="text-center mt-6 mb-6">
           <span>10문제 중 {score}문제를 맞혔어요. </span>
           <br />
           <span>
@@ -76,10 +99,36 @@ export default function ResultDetail({
         </div>
       </div>
       <div className="w-full">
+        <div className="text-center">
+          {/* <span>
+          총 20명 중 <span className="text-primary">20</span>
+          등입니다.
+        </span> */}
+          {/* <br /> */}
+          {uniqueCategory.length > 0 && (
+            <>
+              <span>아래 분야의 문제를 틀리셨네요.</span>
+              <div className="text-center flex justify-center my-6">
+                <div className="w-[250px]  break-words leading-[2.3]">
+                  {uniqueCategory.map((item) => (
+                    <CategoryBadge
+                      key={item}
+                      category={item}
+                      className={"text-sm text-gray-500 px-4 py-1.5 mr-1"}
+                    />
+                  ))}
+                </div>
+              </div>
+            </>
+          )}
+        </div>
+        <br />
+        <span className="ml-6 text-lg">AI 총평</span>
+        <Analysis userResult={userResult} wrongQuizList={wrongQuizList} />
         <span className="ml-6 text-lg">오답 노트</span>
         <div className=" border border-gray-200 rounded-3xl p-4 mx-4 mt-2 mb-6 w-auto">
           {isTestProceeded ? (
-            <ReviewNote wrongAnswers={wrongAnswers} total={total} />
+            <ReviewNote wrongQuizList={wrongQuizList} total={total} />
           ) : (
             <div className="h-60 flex flex-col items-center justify-center gap-4 text-gray-500">
               <p className="text-center">

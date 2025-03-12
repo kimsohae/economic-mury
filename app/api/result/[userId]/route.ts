@@ -1,78 +1,100 @@
-
 import { NextRequest } from "next/server";
-import db from '@/lib/db';
+import db from "@/lib/db";
 import { Answer } from "@/lib/type";
 import { getRank } from "@/lib/rank";
 
-export async function GET(req:NextRequest, {params}: {params: Promise<{userId:string}>}):Promise<Response> {
+export async function GET(
+  req: NextRequest,
+  { params }: { params: Promise<{ userId: string }> }
+): Promise<Response> {
+  console.log("GET");
+  const userId = (await params).userId;
+  const score = await getUserScore(userId);
+  const ranking = await getUserRanking(userId);
+  const wrongAnswers = await getWrongAnswerWithCorrectRate(userId);
+
+  return new Response(
+    JSON.stringify({
+      id: userId,
+      score,
+      rank: getRank(score),
+      ranking,
+      wrongAnswers,
+    }),
+    {
+      status: 200,
+    }
+  );
+}
+
+export async function POST(
+  req: NextRequest,
+  { params }: { params: Promise<{ userId: string }> }
+): Promise<Response> {
+  try {
+    const { score, selectedAnswers } = await req.json();
     const userId = (await params).userId;
-    const score = await getUserScore(userId);
+
+    await insertUser(userId, score);
+    await insertQuizAnswer(userId, selectedAnswers);
     const ranking = await getUserRanking(userId);
     const wrongAnswers = await getWrongAnswerWithCorrectRate(userId);
 
-
-    return new Response(JSON.stringify({score, rank: getRank(score), ranking, wrongAnswers}), {
+    return new Response(
+      JSON.stringify({
+        id: userId,
+        score,
+        rank: getRank(score),
+        ranking,
+        wrongAnswers,
+      }),
+      {
         status: 200,
+      }
+    );
+  } catch (e) {
+    console.error(e);
+    return new Response(JSON.stringify({}), {
+      status: 500,
     });
+  }
 }
 
-export async function POST(req:NextRequest, {params}: {params: Promise<{userId:string}>}):Promise<Response> {
-    try{
-        const {score, selectedAnswers} = await req.json();
-        const userId = (await params).userId;
-
-        await insertUser(userId, score);
-        await insertQuizAnswer(userId, selectedAnswers);
-        const ranking = await getUserRanking(userId);
-        const wrongAnswers = await getWrongAnswerWithCorrectRate(userId);
-
-        return new Response(JSON.stringify({
-            score,
-            rank: getRank(score),
-            ranking,
-            wrongAnswers
-        }), {
-            status: 200,
-        });
-
-    } catch (e) {
-        console.error(e);
-        return new Response(JSON.stringify({}), {
-            status: 500,
-        })
-    }
-} 
-
-
-async function insertUser(userId:string, score:number) {
-    const result = await db.query(`INSERT INTO "user" (id, score)
+async function insertUser(userId: string, score: number) {
+  const result = await db.query(`INSERT INTO "user" (id, score)
      VALUES ('${userId}',${score})`);
-    return result;
+  return result;
 }
 
-async function insertQuizAnswer(userId:string, selectedAnswers: Answer[]) {
-    if(selectedAnswers) {
-        const insertValues = selectedAnswers.map(answer => `('${userId}',${answer.quizId},${answer.optionId},${answer.isCorrect})`).join(',');
+async function insertQuizAnswer(userId: string, selectedAnswers: Answer[]) {
+  if (selectedAnswers) {
+    const insertValues = selectedAnswers
+      .map(
+        (answer) =>
+          `('${userId}',${answer.quizId},${answer.optionId},${answer.isCorrect})`
+      )
+      .join(",");
 
-        const result = db.query(`INSERT INTO "user_answer" (user_id, quiz_id, option_id, is_correct)
+    const result =
+      db.query(`INSERT INTO "user_answer" (user_id, quiz_id, option_id, is_correct)
          VALUES ${insertValues}`);
-        return result;
-    } else {
-        return [];
-    }
+    return result;
+  } else {
+    return [];
+  }
 }
 
-
-async function getUserScore(userId:string) {
-    const result = await db.query(`SELECT score FROM "user" WHERE id = '${userId}'`);
-    return result.rows[0].score;
+async function getUserScore(userId: string) {
+  const result = await db.query(
+    `SELECT score FROM "user" WHERE id = '${userId}'`
+  );
+  return result.rows[0].score;
 }
 
 //TODO: 정답률, 등수 등은 일정 주기로 업데이트하도록 변경
 
-
-async function getUserRanking(userId:string) {
-    const result = await db.query(`WITH ranked_users AS (
+async function getUserRanking(userId: string) {
+  const result = await db.query(`WITH ranked_users AS (
         SELECT 
             id, 
             score, 
@@ -85,16 +107,16 @@ async function getUserRanking(userId:string) {
     FROM ranked_users ru
     WHERE ru.id = '${userId}';`);
 
-    const ranking = {
-        position: result.rows[0].position,
-        total: result.rows[0].total
-    }
+  const ranking = {
+    position: result.rows[0].position,
+    total: result.rows[0].total,
+  };
 
-    return ranking;
+  return ranking;
 }
 
-async function getWrongAnswerWithCorrectRate(userId:string) {
-    const result = await db.query(`WITH correct_counts AS (
+async function getWrongAnswerWithCorrectRate(userId: string) {
+  const result = await db.query(`WITH correct_counts AS (
         SELECT quiz_id, COUNT(*) AS total_attempts,
             SUM(CASE WHEN is_correct = true THEN 1 ELSE 0 END) AS correct_count
         FROM user_answer
@@ -113,13 +135,13 @@ async function getWrongAnswerWithCorrectRate(userId:string) {
     ORDER BY quiz_id ASC;
     `);
 
-    const wrongAnswers = result.rows.map(row => {
-        return {
-            quizId: row.quiz_id,
-            optionId: row.option_id,
-            correctRate: row.correct_rate
-        }
-    });
+  const wrongAnswers = result.rows.map((row) => {
+    return {
+      quizId: row.quiz_id,
+      optionId: row.option_id,
+      correctRate: row.correct_rate,
+    };
+  });
 
-    return wrongAnswers;
-};
+  return wrongAnswers;
+}
