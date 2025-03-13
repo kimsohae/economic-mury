@@ -18,7 +18,7 @@ interface Props {
   userResult: UserResult;
 }
 
-const quizList = quizData.quiz;
+const quizList = quizData.quiz as Quiz[];
 
 export default function ResultDetail({
   isDetailShown,
@@ -48,7 +48,7 @@ export default function ResultDetail({
   );
 
   const uniqueCategory = [
-    ...new Set(wrongQuizList.map((item) => item.category!!)),
+    ...new Set(wrongQuizList.map((item) => item.category)),
   ];
 
   useEffect(() => {
