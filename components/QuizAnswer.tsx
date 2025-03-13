@@ -58,7 +58,6 @@ export default function QuizAnswer({ currentQuiz, isLastQuiz }: Props) {
       //  [2] 마지막 문항일 경우, 결과 페이지로 이동
       if (isLastQuiz) {
         const userId = generateRandomString();
-        document.cookie = `userId=${userId};path=/`;
         setIsLoading(true);
         // 결과 입력(POST 요청)
         const result = await updateUserResult(userId, updatedUser);

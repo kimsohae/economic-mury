@@ -1,4 +1,4 @@
-import { NextRequest } from "next/server";
+import { NextRequest, NextResponse } from "next/server";
 import db from "@/lib/db";
 import { Answer } from "@/lib/type";
 import { getRank } from "@/lib/rank";
@@ -6,23 +6,20 @@ import { getRank } from "@/lib/rank";
 export async function GET(
   req: NextRequest,
   { params }: { params: Promise<{ userId: string }> }
-): Promise<Response> {
-  console.log("GET");
+): Promise<NextResponse> {
   const userId = (await params).userId;
-  const score = await getUserScore(userId);
+  const { score, analysis } = await getUserScoreAndAnalyis(userId);
   const ranking = await getUserRanking(userId);
   const wrongAnswers = await getWrongAnswerWithCorrectRate(userId);
 
-  return new Response(
-    JSON.stringify({
+  return  NextResponse.json(
+    {
       id: userId,
       score,
+      analysis,
       rank: getRank(score),
       ranking,
       wrongAnswers,
-    }),
-    {
-      status: 200,
     }
   );
 }
@@ -30,8 +27,7 @@ export async function GET(
 export async function POST(
   req: NextRequest,
   { params }: { params: Promise<{ userId: string }> }
-): Promise<Response> {
-  try {
+): Promise<NextResponse> {
     const { score, selectedAnswers } = await req.json();
     const userId = (await params).userId;
 
@@ -40,24 +36,16 @@ export async function POST(
     const ranking = await getUserRanking(userId);
     const wrongAnswers = await getWrongAnswerWithCorrectRate(userId);
 
-    return new Response(
-      JSON.stringify({
-        id: userId,
-        score,
-        rank: getRank(score),
-        ranking,
-        wrongAnswers,
-      }),
-      {
-        status: 200,
-      }
-    );
-  } catch (e) {
-    console.error(e);
-    return new Response(JSON.stringify({}), {
-      status: 500,
-    });
-  }
+    const response = NextResponse.json({ id: userId,
+      score,
+      rank: getRank(score),
+      ranking,
+      wrongAnswers,});
+
+    response.cookies.set('userId', userId, {
+      httpOnly: true});
+
+    return response;
 }
 
 async function insertUser(userId: string, score: number) {
@@ -84,14 +72,15 @@ async function insertQuizAnswer(userId: string, selectedAnswers: Answer[]) {
   }
 }
 
-async function getUserScore(userId: string) {
+async function getUserScoreAndAnalyis(userId: string) {
   const result = await db.query(
-    `SELECT score FROM "user" WHERE id = '${userId}'`
+    `SELECT score, analysis FROM "user" WHERE id = '${userId}'`
   );
-  return result.rows[0].score;
+  return result.rows[0];
 }
 
 //TODO: 정답률, 등수 등은 일정 주기로 업데이트하도록 변경
+
 
 async function getUserRanking(userId: string) {
   const result = await db.query(`WITH ranked_users AS (

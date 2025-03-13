@@ -44,4 +44,5 @@ export type UserResult = {
       position: number;
     }
     wrongAnswers: Answer[];
+    analysis?: string;
 }
