@@ -33,6 +33,7 @@ export default function ResultDetail({
     wrongAnswers,
   } = userResult;
   const { title } = RESULT_MAP[rank];
+  // 테스트 진행 여부: 오답노트 노출 분기용. useEffect에서 localStorage 읽음ㅌ
   const [isTestProceeded, setIsTestProceeded] = useState<boolean>();
 
   // 현재 데이터셋에서 quizList 인덱스 -1과 quiz Id 동일
@@ -52,6 +53,7 @@ export default function ResultDetail({
   ];
 
   useEffect(() => {
+    // 로컬스토리지에 result 있는 경우, 테스트 한 번이라도 진행한 것으로 간주
     if (LocalStorageUtility.getItem("result")) {
       setIsTestProceeded(true);
     } else {
@@ -71,7 +73,9 @@ export default function ResultDetail({
           : "right-[-100%] opacity-[0%] "
       } h-[100%] w-[100%] flex flex-col items-center bg-white z-10 rounded-t-2xl overflow-scroll transition-all delay-1 duration-150  ease-in-out`}
     >
-      <div className="fixed max-w-[540px] w-[100%] top-0 bg-white border-b border-gray-200">
+      <div
+        className={`fixed max-w-[540px] w-[100%] top-0 bg-white border-b border-gray-200`}
+      >
         <div className="relative w-[100%]  my-4 h-[28px] flex flex-row items-center justify-center">
           <button onClick={() => onClickClose()}>
             <ArrowIcon className="w-[24px] h-[24px] absolute top-0 left-4" />

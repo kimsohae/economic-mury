@@ -12,40 +12,41 @@ export async function GET(
   const ranking = await getUserRanking(userId);
   const wrongAnswers = await getWrongAnswerWithCorrectRate(userId);
 
-  return  NextResponse.json(
-    {
-      id: userId,
-      score,
-      analysis,
-      rank: getRank(score),
-      ranking,
-      wrongAnswers,
-    }
-  );
+  return NextResponse.json({
+    id: userId,
+    score,
+    analysis,
+    rank: getRank(score),
+    ranking,
+    wrongAnswers,
+  });
 }
 
 export async function POST(
   req: NextRequest,
   { params }: { params: Promise<{ userId: string }> }
 ): Promise<NextResponse> {
-    const { score, selectedAnswers } = await req.json();
-    const userId = (await params).userId;
+  const { score, selectedAnswers } = await req.json();
+  const userId = (await params).userId;
 
-    await insertUser(userId, score);
-    await insertQuizAnswer(userId, selectedAnswers);
-    const ranking = await getUserRanking(userId);
-    const wrongAnswers = await getWrongAnswerWithCorrectRate(userId);
+  await insertUser(userId, score);
+  await insertQuizAnswer(userId, selectedAnswers);
+  const ranking = await getUserRanking(userId);
+  const wrongAnswers = await getWrongAnswerWithCorrectRate(userId);
 
-    const response = NextResponse.json({ id: userId,
-      score,
-      rank: getRank(score),
-      ranking,
-      wrongAnswers,});
+  const response = NextResponse.json({
+    id: userId,
+    score,
+    rank: getRank(score),
+    ranking,
+    wrongAnswers,
+  });
 
-    response.cookies.set('userId', userId, {
-      httpOnly: true});
+  response.cookies.set("userId", userId, {
+    httpOnly: true,
+  });
 
-    return response;
+  return response;
 }
 
 async function insertUser(userId: string, score: number) {
@@ -80,7 +81,6 @@ async function getUserScoreAndAnalyis(userId: string) {
 }
 
 //TODO: 정답률, 등수 등은 일정 주기로 업데이트하도록 변경
-
 
 async function getUserRanking(userId: string) {
   const result = await db.query(`WITH ranked_users AS (
