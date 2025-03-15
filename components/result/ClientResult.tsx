@@ -1,9 +1,8 @@
 "use client";
 import React, { use, useEffect, useState } from "react";
-import Result from "@/components/Result";
+import Result from "@/components/result/Result";
 import { LocalStorageUtility } from "@/lib/utils";
 import { Rank, UserResult } from "@/lib/type";
-import { fetchUserResult } from "@/lib/fetch";
 
 export default function ClientResult() {
   const [userResult, setUserResult] = useState<UserResult>();

@@ -6,7 +6,7 @@ import Link from "next/link";
 import ShareButton from "@/components/ShareButton";
 import Image from "next/image";
 import { RESULT_MAP } from "@/lib/rank";
-import ResultDetail from "@/components/ResultDetail";
+import ResultDetail from "@/components/result/ResultDetail";
 
 /**
  * 필요 데이터

@@ -1,8 +1,8 @@
 import React from "react";
 import { fetchUserResult } from "@/lib/fetch";
 import { cookies } from "next/headers";
-import ClientResult from "@/components/ClientResult";
-import Result from "@/components/Result";
+import ClientResult from "@/components/result/ClientResult";
+import Result from "@/components/result/Result";
 
 type Params = Promise<{
   userId: string;

@@ -8,7 +8,7 @@ import { LocalStorageUtility } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import ReviewNote from "@/components/ReviewNote";
-import Analysis from "@/components/Analysis";
+import AnalysisWrapper from "@/components/result/AnalysisWrapper";
 import quizData from "@/public/questions.json";
 import CategoryBadge from "@/components/CategoryBadge";
 
@@ -128,7 +128,10 @@ export default function ResultDetail({
         </div>
         <br />
         <span className="ml-6 text-lg">AI 총평</span>
-        <Analysis userResult={userResult} wrongQuizList={wrongQuizList} />
+        <AnalysisWrapper
+          userResult={userResult}
+          wrongQuizList={wrongQuizList}
+        />
         <span className="ml-6 text-lg">오답 노트</span>
         <div className=" border border-gray-200 rounded-3xl p-4 mx-4 mt-2 mb-6 w-auto">
           {isTestProceeded ? (

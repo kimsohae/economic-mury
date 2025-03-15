@@ -2,21 +2,21 @@
 import React, { useEffect, useState } from "react";
 
 interface Props {
-  comment: string;
-  isCommentRead: boolean;
+  analysis: string;
+  isAnalysisRead: boolean;
 }
 
-export default function Comment({ comment, isCommentRead }: Props) {
+export default function Analysis({ analysis, isAnalysisRead }: Props) {
   // DB에서 분석 읽어온 경우, 애니메이션 없이 그대로 노출시킨다
   const [displayedText, setDisplayedText] = useState<string>(
-    isCommentRead ? comment : ""
+    isAnalysisRead ? analysis : ""
   );
 
   useEffect(() => {
-    if (isCommentRead) {
+    if (isAnalysisRead) {
       return;
     }
-    const words = comment.split(" ");
+    const words = analysis.split(" ");
     let i = 0;
 
     // 사용자가 요청한 대로, 100ms마다 단어를 한 번에 출력하도록
@@ -34,7 +34,7 @@ export default function Comment({ comment, isCommentRead }: Props) {
 
     // 컴포넌트가 unmount되면 interval을 clear
     return () => clearInterval(interval);
-  }, [comment]);
+  }, [analysis]);
 
   return <div>{displayedText}</div>;
 }

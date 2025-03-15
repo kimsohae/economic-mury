@@ -3,24 +3,24 @@
 import { fetchResultAnalysis } from "@/lib/fetch";
 import { Quiz, UserResult } from "@/lib/type";
 import { useEffect, useRef, useState } from "react";
-import Comment from "./Comment";
 import { LocalStorageUtility } from "@/lib/utils";
+import Analysis from "@/components/result/Analysis";
 interface Props {
   userResult: UserResult;
   wrongQuizList: Quiz[];
 }
 
-export default function Analysis({ userResult, wrongQuizList }: Props) {
+export default function AnalysisWrapper({ userResult, wrongQuizList }: Props) {
   const ref = useRef<HTMLDivElement>(null);
   // const [isVisible, setIsVisible] = useState(false);
-  const [comment, setComment] = useState(userResult.analysis);
-  const isCommentRead = !!userResult.analysis;
+  const [analysis, setAnalysis] = useState(userResult.analysis);
+  const isAnalysisRead = !!userResult.analysis;
 
   useEffect(() => {
     const getAnalysis = async () => {
       const response = await fetchResultAnalysis(userResult, wrongQuizList);
       if (response.content) {
-        setComment(response.content);
+        setAnalysis(response.content);
         const storedResult = LocalStorageUtility.getItem<UserResult>("result");
         if (storedResult?.id === userResult.id) {
           const updatedResult = { ...storedResult };
@@ -34,7 +34,7 @@ export default function Analysis({ userResult, wrongQuizList }: Props) {
     const observer = new IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting) {
-          if (!isCommentRead) {
+          if (!isAnalysisRead) {
             getAnalysis();
           }
         }
@@ -54,8 +54,8 @@ export default function Analysis({ userResult, wrongQuizList }: Props) {
       className=" border border-gray-200 rounded-3xl p-4 mx-4 mt-2 mb-6 w-auto whitespace-pre-line"
       ref={ref}
     >
-      {comment ? (
-        <Comment comment={comment} isCommentRead={isCommentRead} />
+      {analysis ? (
+        <Analysis analysis={analysis} isAnalysisRead={isAnalysisRead} />
       ) : (
         "Loading..."
       )}
