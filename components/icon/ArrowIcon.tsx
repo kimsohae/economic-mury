@@ -1,6 +1,9 @@
 import { SVGProps } from "react";
 
-export default function ArrowIcon(props: SVGProps<SVGSVGElement>) {
+export default function ArrowIcon({
+  className,
+  ...props
+}: SVGProps<SVGSVGElement>) {
   return (
     <svg
       width="15"
@@ -8,6 +11,7 @@ export default function ArrowIcon(props: SVGProps<SVGSVGElement>) {
       viewBox="0 0 15 15"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
+      className={`text-slate-300 hover:text-slate-500 ${className}`}
       {...props}
     >
       <path

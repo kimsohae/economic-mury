@@ -18,7 +18,7 @@ export default function ProgressBar({ quizLength }: Props) {
   return (
     <div className="absolute top-4 w-full flex flex-row">
       <ArrowIcon
-        className="w-[24px] h-[24px] mx-4 text-slate-300 cursor-pointer"
+        className="w-[24px] h-[24px] mx-4 cursor-pointer"
         onClick={() => push("/")}
       />
       <div className="relative flex items-center w-full h-[24px]">
