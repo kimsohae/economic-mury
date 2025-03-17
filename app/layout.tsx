@@ -3,6 +3,7 @@ import MainScreen from "@/components/MainScreen";
 import { UserProvider } from "@/state/UserContext";
 import type { Metadata } from "next";
 import localFont from "next/font/local";
+import Instruction from "@/components/Instruction";
 import "./globals.css";
 
 const pretendard = localFont({
@@ -48,7 +49,7 @@ export default function RootLayout({
       >
         <UserProvider>
           <MainScreen>{children}</MainScreen>
-          {/* <Instruction /> */}
+          <Instruction />
         </UserProvider>
       </body>
     </html>
