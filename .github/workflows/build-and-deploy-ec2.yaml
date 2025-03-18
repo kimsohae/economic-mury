@@ -1,0 +1,61 @@
+---
+name: Build and Deploy NextJS App to EC2 - economic bald
+on:
+  push:
+    branches: [main]
+# These permissions are needed to interact with GitHub's OIDC Token endpoint.
+permissions:
+  id-token: write
+  contents: read
+jobs:
+  build-and-deploy:
+    name: Build and Deploy
+    runs-on: ubuntu-latest
+
+    env:
+      EC2_USER: ubuntu
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: Create .env
+        run: |
+          echo "NEXT_PUBLIC_ROOT_URL"=${{ vars.NEXT_PUBLIC_ROOT_URL }}" >> .env
+          echo "API_URL"=${{ vars.API_URL }}" >> .env
+          echo "NEXT_PUBLIC_KAKAO_JS_KEY=${{ secrets.NEXT_PUBLIC_KAKAO_JS_KEY }}" >> .env
+          echo "DB_URL=${{ secrets.DB_URL }}" >> .env
+          echo "OPENAI_API_KEY=${{ secrets.OPENAI_API_KEY }}" >> .env
+
+      - name: Install Dependencies & build
+        run: |
+          node --version
+          yarn install --frozen-lockfile
+
+      - name: Build Static Website
+        run: yarn build
+
+      - name: Compress buildl files
+        run: tar -czf build.tar.gz ./next
+
+      - name: Upload to EC2
+        uses: appleboy/scp-action@v0.1.7
+        with:
+          host: ${{ secrets.EC2_HOST }}
+          username: ${{ env.EC2_USER }}
+          key: ${{ secrets.EC2_SSH_KEY }}
+        source: "build.tar.gz"
+        target: "/home/ubuntu/economic-bald"
+
+      - name: Extract on EC2 and Restart Service
+        uses: appleboy/ssh-action@v0.1.7
+        with:
+          host: ${{ secrets.EC2_HOST }}
+          username: ${{ env.EC2_USER }}
+          key: ${{ secrets.EC2_SSH_KEY }}
+        script: |
+          cd /home/ubuntu/economic-bald
+          git pull origin main
+          tar -xzf build.tar.gz
+          yarn install
+          pm2 restart 0
