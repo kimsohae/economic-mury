@@ -2,10 +2,6 @@
 @tailwind components;
 @tailwind utilities;
 
-body {
-  font-family: Arial, Helvetica, sans-serif;
-}
-
 @layer base {
   :root {
     --background: 0 0% 100%;
@@ -101,4 +97,168 @@ body {
   100% {
     transform: translateY(0);
   }
+}
+
+@keyframes firstSlide {
+  0% {
+    transform: translate(50%);
+    opacity: 0;
+  }
+  10% {
+    transform: translateX(50%);
+    opacity: 1;
+  }
+  40% {
+    transform: translateX(50%);
+    opacity: 1;
+  }
+  50% {
+    transform: translateX(-100%);
+    opacity: 0;
+  }
+  100% {
+    transform: translateX(-100%);
+    opacity: 0;
+  }
+}
+
+@keyframes secondSlide {
+  0% {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+  40% {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+  50% {
+    transform: translateX(-50%);
+    opacity: 1;
+  }
+  85% {
+    transform: translateX(-50%);
+    opacity: 1;
+  }
+  95% {
+    transform: translateX(-150%);
+    opacity: 0;
+  }
+  100% {
+    transform: translateX(-150%);
+    opacity: 0;
+  }
+}
+
+@keyframes firstText {
+  0% {
+    opacity: 0;
+    display: none;
+  }
+  10% {
+    display: block;
+    opacity: 1;
+  }
+  40% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0;
+    display: none;
+  }
+  100% {
+    opacity: 0;
+    display: none;
+  }
+}
+
+@keyframes secondText {
+  0% {
+    display: none;
+    opacity: 0;
+  }
+  50% {
+    display: none;
+    opacity: 0;
+  }
+  60% {
+    display: block;
+    opacity: 1;
+  }
+  90% {
+    display: block;
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+
+@keyframes firstButton {
+  0% {
+    background-color: hsl(var(--primary));
+  }
+
+  40% {
+    background-color: hsl(var(--primary));
+  }
+
+  50% {
+    background-color: #f8fafc;
+  }
+
+  90% {
+    background-color: #f8fafc;
+  }
+  100% {
+    background-color: hsl(var(--primary));
+  }
+}
+
+@keyframes secondButton {
+  0% {
+    background-color: #f8fafc;
+  }
+
+  40% {
+    background-color: #f8fafc;
+  }
+
+  50% {
+    background-color: hsl(var(--primary));
+  }
+
+  90% {
+    background-color: hsl(var(--primary));
+  }
+  100% {
+    background-color: #f8fafc;
+  }
+}
+
+.first-slide {
+  animation: firstSlide 10s ease-out infinite;
+}
+
+.second-slide {
+  animation: secondSlide 10s ease-out infinite;
+}
+.third-slide {
+  /* transform: translateX(-100%); */
+  animation: thirdSlide 10s ease-out infinite;
+}
+
+.first-text {
+  animation: firstText 10s ease-in-out infinite;
+}
+
+.second-text {
+  animation: secondText 10s ease-in-out infinite;
+}
+
+.first-button {
+  animation: firstButton 10s ease-in-out infinite;
+}
+
+.second-button {
+  animation: secondButton 10s ease-in-out infinite;
 }
