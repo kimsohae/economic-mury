@@ -21,8 +21,8 @@ jobs:
 
       - name: Create .env
         run: |
-          echo "NEXT_PUBLIC_ROOT_URL"=${{ vars.NEXT_PUBLIC_ROOT_URL }}" >> .env
-          echo "API_URL"=${{ vars.API_URL }}" >> .env
+          echo "NEXT_PUBLIC_ROOT_URL=${{ vars.NEXT_PUBLIC_ROOT_URL }}" >> .env
+          echo "API_URL=${{ vars.API_URL }}" >> .env
           echo "NEXT_PUBLIC_KAKAO_JS_KEY=${{ secrets.NEXT_PUBLIC_KAKAO_JS_KEY }}" >> .env
           echo "DB_URL=${{ secrets.DB_URL }}" >> .env
           echo "OPENAI_API_KEY=${{ secrets.OPENAI_API_KEY }}" >> .env
