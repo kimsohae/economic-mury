@@ -1,12 +1,8 @@
-"use client";
 import React, { useState } from "react";
-import { Rank, UserResult } from "@/lib/type";
-import { Button } from "@/components/ui/button";
-import Link from "next/link";
-import ShareButton from "@/components/ShareButton";
+import { UserResult } from "@/lib/type";
 import Image from "next/image";
 import { RESULT_MAP } from "@/lib/rank";
-import ResultDetail from "@/components/result/ResultDetail";
+import ResultFooter from "@/components/result/ResultFooter";
 
 /**
  * 필요 데이터
@@ -22,7 +18,6 @@ interface Props {
 export default function Result({ userResult }: Props) {
   const { rank } = userResult;
   const { desc, title } = RESULT_MAP[rank];
-  const [isDetailShown, setIsDetailShown] = useState<boolean>(false);
 
   return (
     <>
@@ -60,37 +55,7 @@ export default function Result({ userResult }: Props) {
           <span className="text-3xl font-semibold">{title}</span>
         </div>
       </div>
-      <div className="absolute bottom-0 flex flex-col items-center w-full px-4 bottom-[30px] z-[1]">
-        <Button
-          className="bg-[#21c885]"
-          onClick={() => {
-            setIsDetailShown(true);
-          }}
-          size="full"
-        >
-          상세 보기
-        </Button>
-        <div className="w-full flex flex-row gap-[4px] mt-3">
-          <Link href="/" className="w-[50%]">
-            <Button size="full" className="text-black" variant={"outline"}>
-              다시 하기
-            </Button>
-          </Link>
-          <ShareButton
-            title={title}
-            description={desc}
-            variant={"outline"}
-            className="text-black w-[50%] bg-[#FEE500] border-none hover:bg-[#FEE500]/80"
-            imageUrl={`${process.env.NEXT_PUBLIC_ROOT_URL}/img/${rank}_preview.webp`}
-          />
-        </div>
-      </div>
-      {/* {isDetailShown && ( */}
-      <ResultDetail
-        isDetailShown={isDetailShown}
-        setIsDetailShown={setIsDetailShown}
-        userResult={userResult}
-      />
+      <ResultFooter userResult={userResult} title={title} desc={desc} />
       {/* )} */}
     </>
   );

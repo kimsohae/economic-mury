@@ -3,17 +3,17 @@ import React, { useEffect, useState } from "react";
 
 interface Props {
   analysis: string;
-  isAnalysisRead: boolean;
+  isAnalysisExisted: boolean;
 }
 
-export default function Analysis({ analysis, isAnalysisRead }: Props) {
+export default function Analysis({ analysis, isAnalysisExisted }: Props) {
   // DB에서 분석 읽어온 경우, 애니메이션 없이 그대로 노출시킨다
   const [displayedText, setDisplayedText] = useState<string>(
-    isAnalysisRead ? analysis : ""
+    isAnalysisExisted ? analysis : ""
   );
 
   useEffect(() => {
-    if (isAnalysisRead) {
+    if (isAnalysisExisted) {
       return;
     }
     const words = analysis.split(" ");

@@ -12,9 +12,8 @@ interface Props {
 
 export default function AnalysisWrapper({ userResult, wrongQuizList }: Props) {
   const ref = useRef<HTMLDivElement>(null);
-  // const [isVisible, setIsVisible] = useState(false);
   const [analysis, setAnalysis] = useState(userResult.analysis);
-  const isAnalysisRead = !!userResult.analysis;
+  const isAnalysisExisted = !!userResult.analysis;
 
   useEffect(() => {
     const getAnalysis = async () => {
@@ -22,6 +21,7 @@ export default function AnalysisWrapper({ userResult, wrongQuizList }: Props) {
       if (response.content) {
         setAnalysis(response.content);
         const storedResult = LocalStorageUtility.getItem<UserResult>("result");
+        // 로컬스토리지에 result 저장
         if (storedResult?.id === userResult.id) {
           const updatedResult = { ...storedResult };
           updatedResult.analysis = response.content;
@@ -34,7 +34,7 @@ export default function AnalysisWrapper({ userResult, wrongQuizList }: Props) {
     const observer = new IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting) {
-          if (!isAnalysisRead) {
+          if (!isAnalysisExisted && !analysis) {
             getAnalysis();
           }
         }
@@ -46,8 +46,9 @@ export default function AnalysisWrapper({ userResult, wrongQuizList }: Props) {
     );
 
     if (ref.current) observer.observe(ref.current);
+
     return () => observer.disconnect();
-  }, []);
+  }, [analysis]);
 
   return (
     <div
@@ -55,7 +56,7 @@ export default function AnalysisWrapper({ userResult, wrongQuizList }: Props) {
       ref={ref}
     >
       {analysis ? (
-        <Analysis analysis={analysis} isAnalysisRead={isAnalysisRead} />
+        <Analysis analysis={analysis} isAnalysisExisted={isAnalysisExisted} />
       ) : (
         "Loading..."
       )}

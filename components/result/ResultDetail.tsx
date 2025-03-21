@@ -26,15 +26,15 @@ export default function ResultDetail({
   userResult,
 }: Props) {
   const {
-    id,
     rank,
     score,
+    analysis,
     ranking: { total, position },
     wrongAnswers,
   } = userResult;
   const { title } = RESULT_MAP[rank];
-  // 테스트 진행 여부: 오답노트 노출 분기용. useEffect에서 localStorage 읽음ㅌ
-  const [isTestProceeded, setIsTestProceeded] = useState<boolean>();
+  // 오답노트 노출 : 테스트 진행 여부로 판단  useEffect에서 localStorage 읽음
+  const [isReviewNoteShown, setIsReveiwNoteShown] = useState<boolean>();
 
   // 현재 데이터셋에서 quizList 인덱스 -1과 quiz Id 동일
   // 퀴즈 추가 등 확장 시 quizId로 바로 접근할 수 있도록 데이터구조 변경 필요
@@ -54,10 +54,12 @@ export default function ResultDetail({
 
   useEffect(() => {
     // 로컬스토리지에 result 있는 경우, 테스트 한 번이라도 진행한 것으로 간주
-    if (LocalStorageUtility.getItem("result")) {
-      setIsTestProceeded(true);
+    const storedResult = LocalStorageUtility.getItem<UserResult>("result");
+    if (storedResult) {
+      // 오답노트 노출
+      setIsReveiwNoteShown(true);
     } else {
-      setIsTestProceeded(false);
+      setIsReveiwNoteShown(false);
     }
   }, []);
 
@@ -134,7 +136,7 @@ export default function ResultDetail({
         />
         <span className="ml-6 text-lg">오답 노트</span>
         <div className=" border border-gray-200 rounded-3xl p-4 mx-4 mt-2 mb-6 w-auto">
-          {isTestProceeded ? (
+          {isReviewNoteShown ? (
             <ReviewNote wrongQuizList={wrongQuizList} total={total} />
           ) : (
             <div className="h-60 flex flex-col items-center justify-center gap-4 text-gray-500">
