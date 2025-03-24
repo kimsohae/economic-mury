@@ -69,14 +69,14 @@ export default function ResultDetail({
 
   return (
     <div
-      className={`absolute ${
+      className={`absolute transform-gpu ${
         isDetailShown
-          ? "right-[0%] opacity-[100%] "
-          : "right-[-100%] opacity-[0%] "
-      } h-[100%] w-[100%] flex flex-col items-center bg-white z-10 rounded-t-2xl overflow-scroll transition-all delay-1 duration-150  ease-in-out`}
+          ? "translate-x-[0%] opacity-[100%] "
+          : "translate-x-[100%] opacity-[0%]"
+      } h-[100%] w-[100%] flex flex-col items-center bg-white z-10 rounded-t-2xl overflow-scroll duration-300 ease-in-out`}
     >
       <div
-        className={`fixed max-w-[540px] w-[100%] top-0 bg-white border-b border-gray-200`}
+        className={`sticky max-w-[540px] w-[100%] top-0 bg-white border-b border-gray-200`}
       >
         <div className="relative w-[100%]  my-4 h-[28px] flex flex-row items-center justify-center">
           <button onClick={() => onClickClose()}>
@@ -85,7 +85,7 @@ export default function ResultDetail({
           {title}
         </div>
       </div>
-      <div className="flex flex-col items-center mt-14">
+      <div className="flex flex-col items-center ">
         <Image
           width={200}
           height={200}

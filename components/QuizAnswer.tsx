@@ -98,9 +98,9 @@ export default function QuizAnswer({ currentQuiz, isLastQuiz }: Props) {
         <div
           className={`absolute  ${
             isSubmitted
-              ? "bottom-[100%] h-fit border-t-2  rounded-t-3xl"
-              : "bottom-[0%] h-[0%] border-transparent"
-          } w-full bg-white border-gray-200 p-4  transform transition-all duration-300  ease-in-out`}
+              ? "translate-y-[-100%] h-fit border-t-2  rounded-t-3xl"
+              : "translate-y-[0%] border-transparent"
+          } w-full h-[100%] bg-white border-gray-200 p-4  duration-300  ease-in-out`}
         >
           {isSubmitted && (
             <>
@@ -148,9 +148,9 @@ export default function QuizAnswer({ currentQuiz, isLastQuiz }: Props) {
       </div>
 
       <div
-        className={`absolute ${
-          isLoading ? " bottom-[0%] h-[100%]" : " bottom-[-100%] h-[0%]"
-        }  left-0 w-full z-[10] bg-black/70 flex items-center justify-center transform transition-all delay-1 duration-300  ease-in-out`}
+        className={`absolute transform-gpu ${
+          isLoading ? " translate-y-[0%] " : " translate-y-[100%]"
+        }  left-0 w-full h-[100%] z-[10] bg-black/70 flex items-center justify-center duration-300  ease-in-out`}
       >
         {isLoading && <Loading />}
       </div>

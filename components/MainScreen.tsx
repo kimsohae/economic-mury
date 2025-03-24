@@ -26,7 +26,7 @@ export default function MainScreen({
         height: `calc(var(--vh, 1vh) * 100)`,
       }}
       id={"main"}
-      className="relative max-w-[540px] m-auto bg-white flex flex-col items-center justify-center text-gray-800 overflow-x-hidden z-[1] "
+      className="relative max-w-[540px] m-auto bg-white flex flex-col items-center justify-center text-gray-800 overflow-hidden z-[1] "
     >
       {children}
     </main>
