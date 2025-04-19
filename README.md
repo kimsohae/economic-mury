@@ -1,36 +1,23 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+## 프로젝트 개요
 
-## Getting Started
+간단한 경제 퀴즈와 결과를 제공하는 웹애플리케이션입니다. React, Next.js를 기반으로 개발하였으며 UI는 tailwindCSS와 shadcn을 사용하였습니다.
 
-First, run the development server:
+[main] branch: 서버, DB 활용
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+- https://economic-mury.site/
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+[without-server] branch: Static
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+- https://d2bbkrh89cys8o.cloudfront.net
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## 기능 소개
 
-## Learn More
+main 브랜치 기준 기능 소개입니다.
 
-To learn more about Next.js, take a look at the following resources:
+- 간단한 경제 퀴즈 10문제
+- 결과 페이지
+  - 카카오톡 공유
+- 결과 분석
+  - 등수, AI 총평, 오답노트
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+결과 분석에 필요한 API는 따로 백엔드 서버를 구축하지 않고 Next.js의 Route Handler(`app/api`)를 사용하여 구현하였습니다.
