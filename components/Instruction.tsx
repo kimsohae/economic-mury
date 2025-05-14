@@ -71,7 +71,7 @@ export default function Instruction() {
         </div>
         <div className="text-center mt-2 second-text">
           <span>
-            <span className="font-bold">결과 분석과 오답노트</span>를
+            <span className="font-bold">AI 결과 분석과 오답노트</span>를
           </span>
           <br />
           <span>제공해 드려요.</span>
