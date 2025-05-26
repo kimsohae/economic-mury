@@ -38,6 +38,7 @@ export default async function Page({ params }: { params: Params }) {
     return <ClientResult />;
   }
   // 테스트 미진행 : SSR
+  console.log("fetchUserResult!");
   const userResult = await fetchUserResult(userIdFromUrl);
 
   return <Result userResult={userResult} />;
