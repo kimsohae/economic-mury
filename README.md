@@ -24,7 +24,7 @@
 
 ## 결과 페이지 조회 방식
 
-`test/page.tsx` 에서 테스트 오나료 시:
+`test/page.tsx` 에서 테스트 완료 시:
 
 - `userId`는 `cookie`에 저장
 - API 응답 결과는 `localStorage`에 저장
